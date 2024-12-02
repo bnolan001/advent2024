@@ -1,5 +1,5 @@
 
-with open("sample.txt", "r") as file:
+with open("C:\Users\slick\source\repos\advent2024\day01\sample.txt", "r", encoding="utf8") as file:
     left = []
     right = []
     for line in file:
