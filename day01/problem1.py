@@ -1,8 +1,7 @@
-with open("sample.txt", "r") as f:
+with open("sample.txt", "r") as file:
     left = []
     right = []
-    data = f.read().splitlines()
-    for line in data:
+    for line in file:
         values = [int(x) for x in line.split()]
         left.append(values[0])
         right.append(values[1])
