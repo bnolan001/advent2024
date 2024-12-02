@@ -1,16 +1,17 @@
 
-with open("sample.txt", "r", encoding="utf8") as file:
+with open("data.txt", "r", encoding="utf8") as file:
     left = []
-    right = []
+    right = {}
     for line in file:
         values = [int(x) for x in line.split()]
         left.append(values[0])
-        right.append(values[1])
+        if values[1] not in right:
+            right[values[1]] = 0
+        right[values[1]] += 1
 
     left.sort()
-    right.sort()
     total = 0
     for i in range(len(left)):
-        diff = abs(left[i] - right[i])
-        total += diff
+        instances = 0 if left[i] not in right else right[left[i]] * left[i]
+        total += instances
     print(total)
