@@ -1,16 +1,13 @@
+import copy 
 
-with open("data.txt", "r", encoding="utf8") as file:
-    left = []
-    right = []
+with open("sample.txt", "r", encoding="utf8") as file:
+    safe_count = 0
     for line in file:
         values = [int(x) for x in line.split()]
-        left.append(values[0])
-        right.append(values[1])
-
-    left.sort()
-    right.sort()
-    total = 0
-    for i in range(len(left)):
-        diff = abs(left[i] - right[i])
-        total += diff
-    print(total)
+        copied_values = copy.deepcopy(values).sort()
+        if (values == copied_values):
+            for i in range(len(values) - 1):
+                if 1 >= abs(values[i] - values[i + 1]) <= 3:
+                    safe_count += 1
+    print(safe_count)
+   
