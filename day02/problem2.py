@@ -14,7 +14,7 @@ def is_safe(values):
         return safe
     return False
 
-with open("data.txt", "r", encoding="utf8") as file:
+with open("sample.txt", "r", encoding="utf8") as file:
     safe_count = 0
     usafe_data = []
     for line in file:
@@ -27,7 +27,11 @@ with open("data.txt", "r", encoding="utf8") as file:
             usafe_data.append(values)
     
     for data in usafe_data:
-        print(data)
+        for i in range(len(data)):
+            sub_data = data.removeat(i)
+            if is_safe(sub_data):
+                safe_count += 1
+                break
 
     print(safe_count)
    
