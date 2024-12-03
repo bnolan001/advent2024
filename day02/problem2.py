@@ -14,7 +14,7 @@ def is_safe(values):
         return safe
     return False
 
-with open("sample.txt", "r", encoding="utf8") as file:
+with open("data.txt", "r", encoding="utf8") as file:
     safe_count = 0
     usafe_data = []
     for line in file:
@@ -28,7 +28,8 @@ with open("sample.txt", "r", encoding="utf8") as file:
     
     for data in usafe_data:
         for i in range(len(data)):
-            sub_data = data.removeat(i)
+            sub_data = copy.deepcopy(data)
+            del sub_data[i]
             if is_safe(sub_data):
                 safe_count += 1
                 break
