@@ -8,7 +8,6 @@ with open("sample.txt", "r", encoding="utf8") as file:
 
         copied_values = copy.deepcopy(values)
         copied_values.sort(reverse=reverse)
-        print(values, "|", copied_values)
         if (values == copied_values):
             safe = True
             for i in range(len(values) - 1):
@@ -16,7 +15,13 @@ with open("sample.txt", "r", encoding="utf8") as file:
                     safe = False
                     break
             if safe:
+                print("Safe",values, "|", copied_values)
                 safe_count += 1
+            else:
+                print("Unsafe",values, "|", copied_values)
+        else:
+            print("Unsafe",values, "|", copied_values)
+
 
     print(safe_count)
    
