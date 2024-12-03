@@ -16,13 +16,18 @@ def is_safe(values):
 
 with open("data.txt", "r", encoding="utf8") as file:
     safe_count = 0
+    usafe_data = []
     for line in file:
         values = [int(x) for x in line.split()]
         reverse = values[0] > values[len(values) - 1]
 
         if is_safe(values):
             safe_count += 1
-        
+        else:
+            usafe_data.append(values)
+    
+    for data in usafe_data:
+        print(data)
 
     print(safe_count)
    
