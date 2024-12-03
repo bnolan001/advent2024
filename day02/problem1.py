@@ -16,13 +16,7 @@ with open("data.txt", "r", encoding="utf8") as file:
                     safe = False
                     break
             if safe:
-                print("Safe",values, "|", copied_values)
                 safe_count += 1
-            else:
-                print("Unsafe",values, "|", copied_values)
-        else:
-            print("Unsafe",values, "|", copied_values)
-
 
     print(safe_count)
    
