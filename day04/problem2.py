@@ -7,13 +7,13 @@ def find_xmas_count(puzzle, x, y):
     if "MAS" in value or "SAM" in value:
         count += 1
     
-    value = puzzle[y+1][x-1] + puzzle[y][x] + puzzle[y-11][x+1]
+    value = puzzle[y+1][x-1] + puzzle[y][x] + puzzle[y-1][x+1]
     if "MAS" in value or "SAM" in value:
         count += 1
 
     return count == 2
 
-with open("c:\\Users\\slick\\source\\repos\\advent2024\\day04\\sample.txt", "r", encoding="utf8") as file:
+with open("data.txt", "r", encoding="utf8") as file:
     puzzle = []
     for line in file:
         puzzle.append("*" + line.strip() + "*")
