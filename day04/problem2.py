@@ -13,7 +13,7 @@ def find_xmas_count(puzzle, x, y):
 
     return count == 2
 
-with open("sample.txt", "r", encoding="utf8") as file:
+with open("c:\\Users\\slick\\source\\repos\\advent2024\\day04\\sample.txt", "r", encoding="utf8") as file:
     puzzle = []
     for line in file:
         puzzle.append("*" + line.strip() + "*")
