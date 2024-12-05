@@ -16,22 +16,16 @@ def find_xmas_count(puzzle, x, y):
 with open("sample.txt", "r", encoding="utf8") as file:
     puzzle = []
     for line in file:
-        puzzle.append("****" + line.strip() + "****")
+        puzzle.append("*" + line.strip() + "*")
     
     mock_line = "*" * (len(puzzle[0]) - 1)
-    puzzle.insert(0, mock_line )
     puzzle.insert(0, mock_line)
-    puzzle.insert(0, mock_line)
-    puzzle.insert(0, mock_line)
-    puzzle.append(mock_line)
-    puzzle.append(mock_line)
-    puzzle.append(mock_line)
     puzzle.append(mock_line)
     total = 0
     
-    for y in range(3, len(puzzle) - 2):
+    for y in range(1, len(puzzle) - 1):
         row_total = 0
-        for x in range(len(puzzle[y])):
+        for x in range(1, len(puzzle[y]) -1):
             if puzzle[y][x] == "A":
                 found = find_xmas_count(puzzle, x, y)
                 row_total += found
