@@ -1,27 +1,41 @@
-import re
 
-with open("data.txt", "r", encoding="utf8") as file:
-    total = 0
-    doing = True
+def find_xmas_count(puzzle, x, y):
+    count = 0
+    possible_matches = []
+    # left
+    value = puzzle[y-1][x-1] + puzzle[y][x] + puzzle[y+1][x+1]
+    if "MAS" in value or "SAM" in value:
+        count += 1
+    
+    value = puzzle[y+1][x-1] + puzzle[y][x] + puzzle[y-11][x+1]
+    if "MAS" in value or "SAM" in value:
+        count += 1
+
+    return count == 2
+
+with open("sample.txt", "r", encoding="utf8") as file:
+    puzzle = []
     for line in file:
-        cleaned_line = line
+        puzzle.append("****" + line.strip() + "****")
+    
+    mock_line = "*" * (len(puzzle[0]) - 1)
+    puzzle.insert(0, mock_line )
+    puzzle.insert(0, mock_line)
+    puzzle.insert(0, mock_line)
+    puzzle.insert(0, mock_line)
+    puzzle.append(mock_line)
+    puzzle.append(mock_line)
+    puzzle.append(mock_line)
+    puzzle.append(mock_line)
+    total = 0
+    
+    for y in range(3, len(puzzle) - 2):
+        row_total = 0
+        for x in range(len(puzzle[y])):
+            if puzzle[y][x] == "A":
+                found = find_xmas_count(puzzle, x, y)
+                row_total += found
+                total += found
         
-        if not doing and "do()" in cleaned_line:
-            doing = True
-            cleaned_line = cleaned_line[cleaned_line.index("do()") + 4:]
-
-        while "don't()" in cleaned_line:
-            dont_index = cleaned_line.index("don't()")
-            if "do()" in cleaned_line[dont_index:]:
-                do_index = cleaned_line.index("do()", dont_index)
-                cleaned_line = cleaned_line[:dont_index] + cleaned_line[do_index + 4:]
-            else:
-                cleaned_line = cleaned_line[:dont_index]
-                doing = False
-
-        matches = re.findall(r"mul\(\d{1,3},\d{1,3}\)", cleaned_line)
-        for match in matches:
-            numbers = match[4:len(match) - 1].split(",")
-            total += int(numbers[0]) * int(numbers[1])
-
     print(total)
+   
