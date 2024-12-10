@@ -52,7 +52,8 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
                 (temp_x, temp_y, temp_direction) = get_next_move(next_x, next_y, blocked_turn[direction])
                 if (temp_x, temp_y) != (-1, -1) and map[temp_y][temp_x] != ".":
                     map[next_y][next_x] = "O"
-            map[y][x] = "X"
+            if map[y][x] != "O":
+                map[y][x] = "X"
             (x, y) = (next_x, next_y)
         print_map()
        
