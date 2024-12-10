@@ -37,9 +37,9 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     line_ct = 0
     for line in file:
         map += [list(line.strip())]
-        if ('v' in map[line] or '^' in map[line] or '<' in map[line] or '>' in map[line]):
+        if ('v' in map[line_ct] or '^' in map[line_ct] or '<' in map[line_ct] or '>' in map[line_ct]):
             y = line_ct
-            x = map[line].index('v') if 'v' in map[line] else map[line].index('^') if '^' in map[line] else map[line].index('>') if '>' in map[line] else map[line].index('<')
+            x = map[line_ct].index('v') if 'v' in map[line_ct] else map[line_ct].index('^') if '^' in map[line_ct] else map[line_ct].index('>') if '>' in map[line_ct] else map[line_ct].index('<')
         line_ct += 1
 
     (next_x, next_y) = (x, y) 
