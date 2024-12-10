@@ -1,4 +1,8 @@
-import pprint
+def print_map():
+    for y in range(0, len(map)):
+        for x in range(0, len(map[y])):
+            print(map[y][x], end="")
+        print("")
 
 map = []
 with open("day06/sample.txt", "r", encoding="utf8") as file:
@@ -7,6 +11,6 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     for line in file:
         map += line.strip()
 
-print('\n'.join([' '.join([str(cell) for cell in row]) for row in map]))
+print_map()
 print(total)
    
