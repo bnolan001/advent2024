@@ -9,7 +9,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     total = 0
     
     for line in file:
-        map += line.strip()
+        map += [line.strip().split()]
 
 print_map()
 print(total)
