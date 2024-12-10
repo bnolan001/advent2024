@@ -24,11 +24,11 @@ def get_next_move(x, y, direction):
     elif direction == ">":
         (next_x, next_y) = (x + 1, y)
     if next_x < 0 or next_x >= len(map[0]) or next_y < 0 or next_y >= len(map):
-        return (-1, -1)
+        return (-1, -1, 'O')
     
     if map[next_y][next_x] == "#":
         return get_next_move(x, y, blocked_turn[direction])
-    return (next_x, next_y)
+    return (next_x, next_y, direction)
 
 map = []
 with open("day06/sample.txt", "r", encoding="utf8") as file:
@@ -43,7 +43,9 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
         line_ct += 1
 
     (next_x, next_y) = (x, y) 
+    direction = map[y][x]
     while next_x != -1 and next_y != -1:
+        map[next_y][next_x] = direction
         (next_x, next_y) = get_next_move(x, y, map[y][x])
         if (next_x, next_y) != (-1, -1):
             map[y][x] = "X"
