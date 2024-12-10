@@ -52,7 +52,9 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
             (x, y) = (next_x, next_y)
         print_map()
 
-
+    for line in map:
+        total = line.count("X") + total
+        
 print_map()
 print(total)
    
