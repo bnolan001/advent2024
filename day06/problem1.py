@@ -6,6 +6,6 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     for line in file:
         map += line.strip()
 
-    print(map)
+    print(map.join(""))
     print(total)
    
