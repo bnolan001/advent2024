@@ -46,7 +46,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     direction = map[y][x]
     while next_x != -1 and next_y != -1:
         map[next_y][next_x] = direction
-        (next_x, next_y) = get_next_move(x, y, map[y][x])
+        (next_x, next_y, direction) = get_next_move(x, y, map[y][x])
         if (next_x, next_y) != (-1, -1):
             map[y][x] = "X"
             (x, y) = (next_x, next_y)
