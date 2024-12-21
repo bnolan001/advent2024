@@ -49,7 +49,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
         (next_x, next_y, direction) = get_next_move(x, y, map[y][x])
         if (next_x, next_y) != (-1, -1):
             if map[next_y][next_x] == "X":
-                (temp_x, temp_y, temp_direction) = get_next_move(next_x, next_y, blocked_turn[direction])
+                (temp_x, temp_y, temp_direction) = get_next_move(next_x, next_y, direction)
                 if  map[temp_y][temp_x] != "#":
                     map[temp_y][temp_x] = "O"
             else:
