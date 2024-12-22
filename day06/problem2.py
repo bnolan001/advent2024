@@ -71,6 +71,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     direction = map[y][x]
     map[y][x] = "X"
     prev_direction = direction
+    (prev_x, prev_y) = (x, y)
     (next_x, next_y, next_direction) = get_next_move(x, y, direction)
     while next_x != -1 and next_y != -1:
         
@@ -78,9 +79,8 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
         
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)  
         if (prev_direction != next_direction):
-            map[next_y][next_x] = '+'
-        else:            
-            map[next_y][next_x] = blocked_turn[prev_direction]['marker']      
+            map[prev_y][prev_x] = '+'
+        map[next_y][next_x] = blocked_turn[prev_direction]['marker']      
         prev_direction = next_direction
 
         print_map()
