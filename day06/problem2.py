@@ -30,6 +30,41 @@ def get_next_move(x, y, direction):
         return get_next_move(x, y, blocked_turn[direction])
     return (next_x, next_y, direction)
 
+def is_next_move_blocked(x, y, direction):
+    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
+    if (direction != next_direction):
+        return True
+    
+    if (map[next_y][next_x] == "O"):
+        return True
+    
+    return False
+
+
+def loop_able(x, y, direction):
+    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
+    if (direction != next_direction):
+        return False
+    (block_x, block_y, block_direction) = (next_x, next_y, blocked_turn[next_direction])
+    (next_x, next_y, next_direction) = get_next_move(next_x, next_y, blocked_turn[next_direction])
+    if (block_direction != next_direction):
+        return False
+    if (map[next_y][next_x] != "O"):
+        return True
+    
+    return False
+
+def walk_the_map(x, y, direction):
+    if (map[y][x] == "O"):
+        return
+    if (map[y][x] == "."):
+        map[y][x] = "X"
+        return
+    if (map[y][x] == "X"):
+        if (is_next_move_blocked(x, y, direction) == False):
+            map[y][x] = "O"
+            return
+
 map = []
 with open("day06/sample.txt", "r", encoding="utf8") as file:
     total = 0
@@ -42,21 +77,11 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
             x = map[line_ct].index('v') if 'v' in map[line_ct] else map[line_ct].index('^') if '^' in map[line_ct] else map[line_ct].index('>') if '>' in map[line_ct] else map[line_ct].index('<')
         line_ct += 1
 
-    (next_x, next_y) = (x, y) 
     direction = map[y][x]
+    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
     while next_x != -1 and next_y != -1:
-        (next_x, next_y, direction) = get_next_move(x, y, direction)
-        if (next_x, next_y) != (-1, -1):
-            if map[next_y][next_x] == "X":
-                (temp_x, temp_y, temp_direction) = get_next_move(next_x, next_y, direction)
-                if  map[temp_y][temp_x] != "#":
-                    map[temp_y][temp_x] = "O"
-            else:
-                map[y][x] = "X"
-            (x, y) = (next_x, next_y)
-        
-        if map[next_y][next_x] == '.':
-            map[next_y][next_x] = 'X'
+        walk_the_map(next_x, next_y, next_direction)
+        (next_x, next_y, next_direction) = get_next_move(x, y, direction)        
 
         print_map()
        
