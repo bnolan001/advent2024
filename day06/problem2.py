@@ -76,11 +76,12 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
         
         walk_the_map(next_x, next_y, next_direction)
         if (prev_direction != next_direction):
-            map[next_y][next_x] = blocked_turn[prev_direction]['+']
+            map[next_y][next_x] = '+'
         else:            
             map[next_y][next_x] = blocked_turn[prev_direction]['marker']
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)        
-
+        prev_direction = next_direction
+        
         print_map()
        
     for line in map:
