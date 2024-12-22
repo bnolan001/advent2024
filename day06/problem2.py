@@ -6,10 +6,14 @@ def print_map():
     print("")
 
 blocked_turn = {
-    '^': {direction:'>'},
-    '>': {direction:'v'},
-    'v': {direction:'<'},
-    '<': {direction:'^'}
+    '^': {'turn':'>',
+          'marker':'|'},
+    '>': {'turn':'v',
+          'marker':'-'},
+    'v': {'turn':'<',
+          'marker':'|'},
+    '<': {'turn':'^',
+          'marker':'-'}
 }
 
 def get_next_move(x, y, direction):
@@ -27,7 +31,7 @@ def get_next_move(x, y, direction):
         return (-1, -1, 'O')
     
     if map[next_y][next_x] == "#":
-        return get_next_move(x, y, blocked_turn[direction].direction)
+        return get_next_move(x, y, blocked_turn[direction]['turn'])
     return (next_x, next_y, direction)
 
 def is_next_move_blocked(x, y, direction):
@@ -40,19 +44,6 @@ def is_next_move_blocked(x, y, direction):
     
     return False
 
-
-def loop_able(x, y, direction):
-    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
-    if (direction != next_direction):
-        return False
-    (block_x, block_y, block_direction) = (next_x, next_y, blocked_turn[next_direction])
-    (next_x, next_y, next_direction) = get_next_move(next_x, next_y, blocked_turn[next_direction])
-    if (block_direction != next_direction):
-        return False
-    if (map[next_y][next_x] != "O"):
-        return True
-    
-    return False
 
 def walk_the_map(x, y, direction):
     if (map[y][x] == "O"):
@@ -79,9 +70,15 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
 
     direction = map[y][x]
     map[y][x] = "X"
+    prev_direction = direction
     (next_x, next_y, next_direction) = get_next_move(x, y, direction)
     while next_x != -1 and next_y != -1:
+        
         walk_the_map(next_x, next_y, next_direction)
+        if (prev_direction != next_direction):
+            map[next_y][next_x] = blocked_turn[prev_direction]['+']
+        else:            
+            map[next_y][next_x] = blocked_turn[prev_direction]['marker']
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)        
 
         print_map()
