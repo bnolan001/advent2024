@@ -6,10 +6,10 @@ def print_map():
     print("")
 
 blocked_turn = {
-    '^': '>',
-    '>': 'v',
-    'v': '<',
-    '<': '^'
+    '^': {direction:'>'},
+    '>': {direction:'v'},
+    'v': {direction:'<'},
+    '<': {direction:'^'}
 }
 
 def get_next_move(x, y, direction):
@@ -27,7 +27,7 @@ def get_next_move(x, y, direction):
         return (-1, -1, 'O')
     
     if map[next_y][next_x] == "#":
-        return get_next_move(x, y, blocked_turn[direction])
+        return get_next_move(x, y, blocked_turn[direction].direction)
     return (next_x, next_y, direction)
 
 def is_next_move_blocked(x, y, direction):
