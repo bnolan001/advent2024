@@ -78,10 +78,11 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
         line_ct += 1
 
     direction = map[y][x]
+    map[y][x] = "X"
     (next_x, next_y, next_direction) = get_next_move(x, y, direction)
     while next_x != -1 and next_y != -1:
         walk_the_map(next_x, next_y, next_direction)
-        (next_x, next_y, next_direction) = get_next_move(x, y, direction)        
+        (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)        
 
         print_map()
        
