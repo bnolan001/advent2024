@@ -37,6 +37,19 @@ def get_next_move(x, y, direction):
 
     return (next_x, next_y, direction)
 
+def can_loop(x, y, direction):
+    turn = movement_config[direction]['turn']
+    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
+    # there is already a blockage on the next move
+    if (next_x == -1 and next_y == -1) or (direction != next_direction):
+        return False
+    
+    (next_x, next_y, next_direction) = get_next_move(x, y, turn)
+    if(map[next_y][next_x] in ['+','|', '-']):
+        return True
+
+    return False
+
 map = []
 with open("day06/sample.txt", "r", encoding="utf8") as file:
     total = 0
