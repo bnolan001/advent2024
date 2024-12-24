@@ -72,7 +72,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
         if next_x == -1 and next_y == -1:
             continue
 
-        if (map[next_y][next_x] == direction):
+        if (map[next_y][next_x] == direction) or (map[next_y][next_x] == 'O'):
             (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
             continue
         if (prev_direction != next_direction):
