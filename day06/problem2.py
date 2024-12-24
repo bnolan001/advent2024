@@ -61,7 +61,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
 
         if (prev_direction != next_direction) or (map[next_y][next_x] == movement_config[next_direction]['marker']):
             map[next_y][next_x] = movement_config[next_direction]['marker']
-            map[prev_x][prev_y] = '+'
+            map[prev_y][prev_x] = '+'
         elif (map[next_y][next_x] == '.'):
             map[next_y][next_x] = movement_config[next_direction]['marker']
         else:
