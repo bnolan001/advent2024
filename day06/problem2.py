@@ -5,56 +5,37 @@ def print_map():
         print("")
     print("")
 
-blocked_turn = {
+movement_config = {
     '^': {'turn':'>',
-          'marker':'|'},
+          'marker':'|',
+          'move_x': 0,
+          'move_y': -1},
     '>': {'turn':'v',
-          'marker':'-'},
+          'marker':'-',
+          'move_x': 1,
+          'move_y': 0},
     'v': {'turn':'<',
-          'marker':'|'},
+          'marker':'|',
+          'move_x': 0,
+          'move_y': 1},
     '<': {'turn':'^',
-          'marker':'-'}
+          'marker':'-',
+          'move_x': -1,
+          'move_y': 0}
 }
 
 def get_next_move(x, y, direction):
     next_x = x
     next_y = y
-    if direction == "^":
-        (next_x, next_y) = (x, y - 1)
-    elif direction == "v":
-        (next_x, next_y) = (x, y + 1)
-    elif direction == "<":
-        (next_x, next_y) = (x - 1, y)
-    elif direction == ">":
-        (next_x, next_y) = (x + 1, y)
+    (next_x, next_y) = (x + movement_config[direction]['move_x'], y + movement_config[direction]['move_y'])
+    
     if next_x < 0 or next_x >= len(map[0]) or next_y < 0 or next_y >= len(map):
         return (-1, -1, 'O')
     
     if map[next_y][next_x] == "#":
-        return get_next_move(x, y, blocked_turn[direction]['turn'])
+        return get_next_move(x, y, movement_config[direction]['turn'])
+
     return (next_x, next_y, direction)
-
-def is_next_move_blocked(x, y, direction):
-    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
-    if (direction != next_direction):
-        return True
-    
-    if (map[next_y][next_x] == "O"):
-        return True
-    
-    return False
-
-
-def walk_the_map(x, y, direction):
-    if (map[y][x] == "O"):
-        return
-    if (map[y][x] == "."):
-        map[y][x] = "X"
-        return
-    if (map[y][x] == "X"):
-        if (is_next_move_blocked(x, y, direction) == False):
-            map[y][x] = "O"
-            return
 
 map = []
 with open("day06/sample.txt", "r", encoding="utf8") as file:
@@ -69,22 +50,21 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
         line_ct += 1
 
     direction = map[y][x]
-    map[y][x] = "X"
+    map[y][x] = movement_config[direction]['marker']
     prev_direction = direction
     (prev_x, prev_y) = (x, y)
     (next_x, next_y, next_direction) = get_next_move(x, y, direction)
-    while next_x != -1 and next_y != -1:
-        
-        walk_the_map(next_x, next_y, next_direction)
-        
+    while next_x != -1 and next_y != -1:        
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)  
         if next_x == -1 and next_y == -1:
             continue
 
-        if (prev_direction != next_direction):
+        if (prev_direction != next_direction) or (map[next_y][next_x] == movement_config[next_direction]['marker']):
             map[prev_y][prev_x] = '+'
-        if (map[next_y][next_x] != '+'):
-            map[next_y][next_x] = blocked_turn[next_direction]['marker']      
+        elif (map[next_y][next_x] == '.'):
+            map[next_y][next_x] = movement_config[next_direction]['marker']
+        else:
+            map[next_y][next_x] = movement_config[next_direction]['marker']
         prev_direction = next_direction
 
         print_map()
