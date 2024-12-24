@@ -86,6 +86,10 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
             map[next_y][next_x] = movement_config[next_direction]['marker']
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
 
+        if (can_loop(next_x, next_y, next_direction)):
+            (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
+            map[block_y][block_x] = 'O'
+
         print_map()
        
     for line in map:
