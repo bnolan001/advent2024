@@ -50,7 +50,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
         line_ct += 1
 
     direction = map[y][x]
-    map[y][x] = movement_config[direction]['marker']
+    map[y][x] = direction
     prev_direction = direction
     (next_x, next_y) = (x, y)
     (prev_x, prev_y) = (x, y)
@@ -59,6 +59,9 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
         if next_x == -1 and next_y == -1:
             continue
 
+        if (map[next_y][next_x] == direction):
+            (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
+            continue
         if (prev_direction != next_direction):
             map[next_y][next_x] = movement_config[next_direction]['marker']
             map[prev_y][prev_x] = '+'
