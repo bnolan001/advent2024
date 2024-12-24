@@ -96,5 +96,5 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
         total = line.count("O") + total
 
 print_map()
-print(total)
+print(total)  # 834 is too low
    
