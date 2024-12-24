@@ -55,7 +55,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     (next_x, next_y) = (x, y)
     (prev_x, prev_y) = (x, y)
     while next_x != -1 and next_y != -1:        
-        (next_x, next_y, next_direction) = get_next_move(next_x, next_y, direction)  
+        (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction)  
         if next_x == -1 and next_y == -1:
             continue
 
