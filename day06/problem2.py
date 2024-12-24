@@ -17,7 +17,7 @@ movement_config = {
     'v': {'turn':'<',
           'marker':'|',
           'move_x': 0,
-          'move_y': -1},
+          'move_y': 1},
     '<': {'turn':'^',
           'marker':'-',
           'move_x': -1,
