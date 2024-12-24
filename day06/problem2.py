@@ -53,7 +53,6 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     map[y][x] = movement_config[direction]['marker']
     prev_direction = direction
     (prev_x, prev_y) = (x, y)
-    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
     while next_x != -1 and next_y != -1:        
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)  
         if next_x == -1 and next_y == -1:
