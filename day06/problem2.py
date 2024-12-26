@@ -52,6 +52,19 @@ def can_loop(x, y, direction):
 
     return False
 
+def can_loop_brute_force(x, y, direction):
+    num_turns = 0
+    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
+    current_direction = direction
+    while(next_x != -1 and next_y != -1) or num_turns > 4:
+        if (next_x == x and next_y == y):
+            return True
+        if (current_direction != next_direction):
+            num_turns += 1
+        (next_x, next_y, next_direction) = get_next_move(next_x, next_y, direction)
+
+    return False
+
 map = []
 with open("day06/sample_3.txt", "r", encoding="utf8") as file:
     total = 0
@@ -88,7 +101,7 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
             map[next_y][next_x] = movement_config[next_direction]['marker']
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
 
-        if (can_loop(next_x, next_y, next_direction)):
+        if (can_loop_brute_force(next_x, next_y, next_direction)):
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
             map[block_y][block_x] = 'O'
 
