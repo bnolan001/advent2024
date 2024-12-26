@@ -43,7 +43,7 @@ def can_loop(x, y, direction):
     turn = movement_config[direction]['turn']
     (next_x, next_y, next_direction) = get_next_move(x, y, direction)
     # there is already a blockage on the next move
-    if (next_x == -1 and next_y == -1) or (direction != next_direction):
+    if (next_x == -1 and next_y == -1) or (direction != next_direction) or (map[next_y][next_x] != '.'):
         return False
     
     (next_x, next_y, next_direction) = get_next_move(x, y, turn)
@@ -53,7 +53,7 @@ def can_loop(x, y, direction):
     return False
 
 map = []
-with open("day06/sample_0.txt", "r", encoding="utf8") as file:
+with open("day06/sample_3.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
@@ -92,7 +92,7 @@ with open("day06/sample_0.txt", "r", encoding="utf8") as file:
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
             map[block_y][block_x] = 'O'
 
-        print_map()
+        #print_map()
        
     for line in map:
         total = line.count("O") + total
