@@ -1,3 +1,5 @@
+# Extra sample maps from https://www.reddit.com/r/adventofcode/comments/1h94doz/i_desperately_need_help_with_day_6_part_2/
+
 def print_map():
     for y in range(0, len(map)):
         for x in range(0, len(map[y])):
@@ -51,7 +53,7 @@ def can_loop(x, y, direction):
     return False
 
 map = []
-with open("day06/data.txt", "r", encoding="utf8") as file:
+with open("day06/sample_0.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
