@@ -54,6 +54,9 @@ def can_loop(x, y, direction):
 
 def can_loop_brute_force(x, y, direction):
     num_turns = 0
+    if (map[y + movement_config[direction]['move_y']][x + movement_config[direction]['move_x']] not in ['.', '#']):
+        return False
+    
     # simulate a blockage placed on the next move
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
     if (map[next_y][next_x] == '#'):
