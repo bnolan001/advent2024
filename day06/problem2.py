@@ -114,14 +114,14 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
             map[next_y][next_x] = '+'
         else:
             map[next_y][next_x] = movement_config[next_direction]['marker']
-        (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
 
         if (can_loop_brute_force(next_x, next_y, next_direction)):
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
             #map[block_y][block_x] = 'O'
             blockages += ((block_x, block_y, block_direction),)
             print_map()
-        
+            
+        (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
         (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
         print("\nStep: ", unique_step_count)
         
