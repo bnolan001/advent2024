@@ -51,10 +51,10 @@ def can_loop_brute_force(x, y, direction):
     visited = set()
     
     while(next_x != -1 and next_y != -1):
-        if (next_x == x and next_y == y) or ((next_x, next_y, next_direction) in visited):
+        if (next_x == x and next_y == y) or ((next_x, next_y) in visited):
             return True
         
-        visited.add((next_x, next_y, next_direction))
+        visited.add((next_x, next_y))
 
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)
 
