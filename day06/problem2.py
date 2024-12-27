@@ -54,6 +54,7 @@ def can_loop_brute_force(x, y, direction):
     current_direction = next_direction
     while(next_x != -1 and next_y != -1):
         steps += 1
+        # if we've reached our starting point or traversed too many steps, we've looped
         if (next_x == x and next_y == y) or (steps > max_loop_steps):
             return True
         
@@ -84,7 +85,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
 
     max_x = len(map[0])
     max_y = len(map)
-    max_loop_steps = max_x * max_y * 2
+    max_loop_steps = max_x * max_y
     direction = map[y][x]
     map[y][x] = direction
     prev_direction = direction
