@@ -83,11 +83,14 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     prev_direction = direction
     (next_x, next_y) = (x, y)
     (prev_x, prev_y) = (x, y)
+    unique_step_count = 0
     while next_x != -1 and next_y != -1:        
         (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction)  
         if next_x == -1 and next_y == -1:
             continue
 
+        if map[next_y][next_x] == '.':
+            unique_step_count += 1
         if (map[next_y][next_x] == direction) or (map[next_y][next_x] == 'O'):
             (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
             continue
@@ -106,6 +109,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
             map[block_y][block_x] = 'O'
 
+        print("Step: ", unique_step_count)
         #print_map()
        
     for line in map:

@@ -34,7 +34,7 @@ def get_next_move(x, y, direction):
     return (next_x, next_y, direction)
 
 map = []
-with open("day06/data.txt", "r", encoding="utf8") as file:
+with open("day06/sample.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
