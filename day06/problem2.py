@@ -55,7 +55,10 @@ def can_loop(x, y, direction):
 def can_loop_brute_force(x, y, direction):
     num_turns = 0
     # simulate a blockage placed on the next move
-    (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
+    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
+    if (map[next_y][next_x] == '#'):
+        (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[movement_config[direction]['turn']])
+
     current_direction = direction
     while(next_x != -1 and next_y != -1) or num_turns > 4:
         if (next_x == x and next_y == y):
@@ -91,7 +94,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
 
         if map[next_y][next_x] == '.':
             unique_step_count += 1
-            
+
         if (map[next_y][next_x] == direction) or (map[next_y][next_x] == 'O'):
             (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
             continue
