@@ -95,13 +95,13 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
     (next_x, next_y) = (x, y)
     (prev_x, prev_y) = (x, y)
     unique_step_count = 1
-    blockages = ()
+    blockages = set()
     while next_x != -1 and next_y != -1:
         (block_x, block_y) = (next_x + movement_config[next_direction]['move_x'], next_y + movement_config[next_direction]['move_y'])
         if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
-            
+            # Ignore walls and starting position
             if (map[block_y][block_x] not in [direction, '#']):
-                blockages += ((block_x, block_y), )
+                blockages.add((block_x, block_y))
             #print_map()
 
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
@@ -113,6 +113,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
             unique_step_count += 1
             print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
 
+        # Mark the map with the direction
         if (map[next_y][next_x] == direction):
             (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
             continue
