@@ -126,11 +126,6 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
         else:
             map[next_y][next_x] = movement_config[next_direction]['marker']
 
-        
-        
-       
-    #for line in map:
-    #    total = line.count("O") + total
 print("--Completed--")
 for blockage in blockages:
     map[blockage[1]][blockage[0]] = 'O'
