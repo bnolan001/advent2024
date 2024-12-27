@@ -76,7 +76,7 @@ def can_loop_brute_force(x, y, direction):
     return False
 
 map = []
-with open("day06/sample_3.txt", "r", encoding="utf8") as file:
+with open("day06/sample.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
@@ -95,10 +95,7 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
     (prev_x, prev_y) = (x, y)
     unique_step_count = 1
     blockages = ()
-    while next_x != -1 and next_y != -1:        
-        if next_x == -1 or next_y == -1:
-            continue
-
+    while next_x != -1 and next_y != -1:
         if (can_loop_brute_force(next_x, next_y, next_direction)):
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
             #map[block_y][block_x] = 'O'
@@ -108,6 +105,8 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
         (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
         
+        if next_x == -1 or next_y == -1:
+            continue
         if map[next_y][next_x] == '.':
             unique_step_count += 1
 
