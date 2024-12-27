@@ -93,6 +93,7 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
     (next_x, next_y) = (x, y)
     (prev_x, prev_y) = (x, y)
     unique_step_count = 1
+    blockages = ()
     while next_x != -1 and next_y != -1:        
         (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction)  
         if next_x == -1 and next_y == -1:
@@ -117,14 +118,16 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
 
         if (can_loop_brute_force(next_x, next_y, next_direction)):
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
-            map[block_y][block_x] = 'O'
+            #map[block_y][block_x] = 'O'
+            blockages += ((block_x, block_y, block_direction),)
+            print_map()
 
         print("\nStep: ", unique_step_count)
-        print_map()
+        
        
-    for line in map:
-        total = line.count("O") + total
+    #for line in map:
+    #    total = line.count("O") + total
 print("--Completed--")
 print_map()
-print(total)  # 834 is too low
+print(len(blockages))  # 834 is too low
    
