@@ -51,22 +51,19 @@ def can_loop_brute_force(x, y, direction):
     #    return False
 
     # simulate a blockage placed on the next move
-    prev_marker = map[y][x]
-    map[y][x] = '#'
+    
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
     visited = set()
     
     while(next_x != -1 and next_y != -1):
         #if (next_x == x and next_y == y) or ((next_x, next_y, next_direction) in visited):
         if ((next_x, next_y, next_direction) in visited):
-            map[y][x] = prev_marker
             return True
         
         visited.add((next_x, next_y, next_direction))
 
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)
     
-    map[y][x] = prev_marker
     return False
 
 def mark_the_map(prev_direction, next_direction, prev_x, prev_y, next_x, next_y):  
@@ -88,9 +85,12 @@ def traverse_the_map(x, y):
     while next_x != -1 and next_y != -1:
         print_map()
         (block_x, block_y, ignore) = get_next_move(next_x, next_y, next_direction)
+        prev_marker = map[block_y][block_x]
+        map[block_y][block_x] = '#'
         if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
             blockages.add((block_x, block_y))
             print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
+        map[block_y][block_x] = prev_marker
 
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
         (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
