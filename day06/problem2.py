@@ -63,7 +63,7 @@ def can_loop_brute_force(x, y, direction):
 
     return False
 
-def mark_the_map(x, y, direction):  
+def mark_the_map():  
     if (prev_direction != next_direction):
         map[next_y][next_x] = movement_config[next_direction]['marker']
         map[prev_y][prev_x] = '+'
@@ -123,7 +123,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
         if (map[next_y][next_x] == direction):
             (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
 
-        mark_the_map(next_y, next_x, next_direction)
+        mark_the_map()
         
 
 print("--Completed--")
