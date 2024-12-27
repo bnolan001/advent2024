@@ -1,12 +1,9 @@
 # Extra sample maps from https://www.reddit.com/r/adventofcode/comments/1h94doz/i_desperately_need_help_with_day_6_part_2/
 
-def print_map():
-    for y in range(0, len(map)):
-        for x in range(0, len(map[y])):
-            print(map[y][x], end="")
-        print("")
-    print("")
-
+map = []
+max_x = 0
+max_y = 0
+blockages = set()
 movement_config = {
     '^': {'turn':'>',
           'marker':'|',
@@ -25,6 +22,14 @@ movement_config = {
           'move_x': -1,
           'move_y': 0}
 }
+
+def print_map():
+    for y in range(0, len(map)):
+        for x in range(0, len(map[y])):
+            print(map[y][x], end="")
+        print("")
+    print("")
+
 
 def get_next_move(x, y, direction):
     next_x = x
@@ -71,7 +76,13 @@ def mark_the_map():
     else:
         map[next_y][next_x] = movement_config[next_direction]['marker']
 
-def traverse_the_map():
+def traverse_the_map(x, y):
+    unique_step_count = 1
+    direction = map[y][x]
+    prev_direction = direction
+    next_direction = direction
+    (next_x, next_y) = (x, y)
+    (prev_x, prev_y) = (x, y)
     while next_x != -1 and next_y != -1:
         (block_x, block_y) = (next_x + movement_config[next_direction]['move_x'], next_y + movement_config[next_direction]['move_y'])
         if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
@@ -94,9 +105,7 @@ def traverse_the_map():
         mark_the_map()
         
 
-map = []
-max_x = 0
-max_y = 0
+
 with open("day06/data.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
@@ -111,14 +120,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
     max_x = len(map[0])
     max_y = len(map)
     max_loop_steps = max_x * max_y
-    direction = map[y][x]
-    prev_direction = direction
-    next_direction = direction
-    (next_x, next_y) = (x, y)
-    (prev_x, prev_y) = (x, y)
-    unique_step_count = 1
-    blockages = set()
-    traverse_the_map()
+    traverse_the_map(x, y)
 
 print("--Completed--")
 for blockage in blockages:
