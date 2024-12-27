@@ -60,7 +60,7 @@ def can_loop_brute_force(x, y, direction):
         (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[movement_config[direction]['turn']])
 
     current_direction = direction
-    while(next_x != -1 and next_y != -1) or num_turns > 4:
+    while(next_x != -1 and next_y != -1) and num_turns < 4:
         if (next_x == x and next_y == y):
             return True
         if (current_direction != next_direction):
