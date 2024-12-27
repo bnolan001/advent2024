@@ -71,6 +71,28 @@ def mark_the_map():
     else:
         map[next_y][next_x] = movement_config[next_direction]['marker']
 
+def traverse_the_map():
+    while next_x != -1 and next_y != -1:
+        (block_x, block_y) = (next_x + movement_config[next_direction]['move_x'], next_y + movement_config[next_direction]['move_y'])
+        if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
+            # Ignore walls and starting position
+            if (map[block_y][block_x] not in [direction, '#']):
+                blockages.add((block_x, block_y))
+
+            print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
+
+            #print_map()
+
+        (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
+        (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
+        
+        if next_x == -1 or next_y == -1:
+            continue
+        if map[next_y][next_x] == '.':
+            unique_step_count += 1    
+
+        mark_the_map()
+        
 
 map = []
 max_x = 0
@@ -96,27 +118,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
     (prev_x, prev_y) = (x, y)
     unique_step_count = 1
     blockages = set()
-    while next_x != -1 and next_y != -1:
-        (block_x, block_y) = (next_x + movement_config[next_direction]['move_x'], next_y + movement_config[next_direction]['move_y'])
-        if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
-            # Ignore walls and starting position
-            if (map[block_y][block_x] not in [direction, '#']):
-                blockages.add((block_x, block_y))
-
-            print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
-
-            #print_map()
-
-        (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
-        (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
-        
-        if next_x == -1 or next_y == -1:
-            continue
-        if map[next_y][next_x] == '.':
-            unique_step_count += 1    
-
-        mark_the_map()
-        
+    traverse_the_map()
 
 print("--Completed--")
 for blockage in blockages:
