@@ -83,7 +83,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
 
     max_x = len(map[0])
     max_y = len(map)
-    max_loop_steps = max_x * max_y
+    max_loop_steps = max_x * max_y * 2
     direction = map[y][x]
     map[y][x] = direction
     prev_direction = direction
@@ -130,6 +130,6 @@ for blockage in blockages:
     map[blockage[1]][blockage[0]] = 'O'
 
 print_map()
-print(len(blockages))  # 834, 1793 is too low
+print(len(blockages))  # 834, 1793 is too low, 2006 is incorrect (not sure if too high or low)
 
    
