@@ -90,12 +90,12 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
     direction = map[y][x]
     map[y][x] = direction
     prev_direction = direction
+    next_direction = direction
     (next_x, next_y) = (x, y)
     (prev_x, prev_y) = (x, y)
     unique_step_count = 1
     blockages = ()
     while next_x != -1 and next_y != -1:        
-        (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction)  
         if next_x == -1 and next_y == -1:
             continue
 
@@ -121,7 +121,8 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
             #map[block_y][block_x] = 'O'
             blockages += ((block_x, block_y, block_direction),)
             print_map()
-
+        
+        (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
         print("\nStep: ", unique_step_count)
         
        
