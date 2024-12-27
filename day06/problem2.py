@@ -63,7 +63,7 @@ def can_loop_brute_force(x, y, direction):
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
     
     current_direction = next_direction
-    while(next_x != -1 and next_y != -1 and num_turns < num_blockers):
+    while(next_x != -1 and next_y != -1 and num_turns < num_blockers * 2):
         if (next_x == x and next_y == y):
             return True
         
@@ -79,7 +79,7 @@ map = []
 max_x = 0
 max_y = 0
 num_blockers = 0
-with open("day06/sample_3.txt", "r", encoding="utf8") as file:
+with open("day06/data.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
