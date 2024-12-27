@@ -54,7 +54,8 @@ def can_loop_brute_force(x, y, direction):
     visited = set()
     
     while(next_x != -1 and next_y != -1):
-        if (next_x == x and next_y == y) or ((next_x, next_y, next_direction) in visited):
+        #if (next_x == x and next_y == y) or ((next_x, next_y, next_direction) in visited):
+        if ((next_x, next_y, next_direction) in visited):
             return True
         
         visited.add((next_x, next_y, next_direction))
@@ -90,7 +91,7 @@ def traverse_the_map(x, y):
         
         if next_x == -1 or next_y == -1:
             continue
-        
+
         if map[next_y][next_x] == '.':
             unique_step_count += 1    
 
