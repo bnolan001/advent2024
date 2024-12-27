@@ -105,6 +105,9 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
             blockages += ((block_x, block_y, block_direction),)
             print_map()
 
+        (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
+        (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
+        
         if map[next_y][next_x] == '.':
             unique_step_count += 1
 
@@ -122,9 +125,6 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
             map[next_y][next_x] = movement_config[next_direction]['marker']
 
         
-
-        (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
-        (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
         print("\nStep: ", unique_step_count)
         
        
