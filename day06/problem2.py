@@ -104,6 +104,7 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
 
         if (map[next_y][next_x] == direction) or (map[next_y][next_x] == 'O'):
             (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
+            (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
             continue
         if (prev_direction != next_direction):
             map[next_y][next_x] = movement_config[next_direction]['marker']
