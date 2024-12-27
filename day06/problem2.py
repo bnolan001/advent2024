@@ -55,9 +55,8 @@ def can_loop_brute_force(x, y, direction):
     current_direction = next_direction
     while(next_x != -1 and next_y != -1):
         steps += 1
-        # if we've reached our starting point or traversed too many steps, we've looped
-        #if (next_x == x and next_y == y) or ((next_x, next_y) in visited):
-        if ((next_x, next_y) in visited):
+       
+        if (next_x == x and next_y == y) or ((next_x, next_y) in visited):
             return True
         
         visited.add((next_x, next_y))
@@ -74,7 +73,7 @@ max_x = 0
 max_y = 0
 max_loop_steps = 0
 num_blockers = 0
-with open("day06/data.txt", "r", encoding="utf8") as file:
+with open("day06/sample_1.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
