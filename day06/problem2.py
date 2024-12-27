@@ -39,21 +39,9 @@ def get_next_move(x, y, direction):
 
     return (next_x, next_y, direction)
 
-def can_loop(x, y, direction):
-    turn = movement_config[direction]['turn']
-    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
-    # there is already a blockage on the next move
-    if (next_x == -1 and next_y == -1) or (direction != next_direction) or (map[next_y][next_x] != '.'):
-        return False
-    
-    (next_x, next_y, next_direction) = get_next_move(x, y, turn)
-    if(map[next_y][next_x] in ['+','|', '-']):
-        return True
-
-    return False
-
 def can_loop_brute_force(x, y, direction):
     num_turns = 0
+    steps = 0
     check_x = x + movement_config[direction]['move_x']
     check_y = y + movement_config[direction]['move_y']
     if (check_x < 0 or check_y < 0  or check_y >= max_y or check_x >= max_x or map[y + movement_config[direction]['move_y']][x + movement_config[direction]['move_x']] not in ['.', '#']):
@@ -63,8 +51,9 @@ def can_loop_brute_force(x, y, direction):
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
     
     current_direction = next_direction
-    while(next_x != -1 and next_y != -1) and (num_turns < num_blockers * 200):
-        if (next_x == x and next_y == y):
+    while(next_x != -1 and next_y != -1):
+        steps += 1
+        if (next_x == x and next_y == y) or (steps > max_loop_steps):
             return True
         
         if (current_direction != next_direction):
@@ -78,6 +67,7 @@ def can_loop_brute_force(x, y, direction):
 map = []
 max_x = 0
 max_y = 0
+max_loop_steps = 0
 num_blockers = 0
 with open("day06/data.txt", "r", encoding="utf8") as file:
     total = 0
@@ -93,6 +83,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
 
     max_x = len(map[0])
     max_y = len(map)
+    max_loop_steps = max_x * max_y
     direction = map[y][x]
     map[y][x] = direction
     prev_direction = direction
