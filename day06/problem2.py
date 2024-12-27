@@ -83,7 +83,7 @@ def traverse_the_map(x, y):
     direction = map[y][x]
     (next_x, next_y) = (x, y)
     while next_x != -1 and next_y != -1:
-        print_map()
+        #print_map()
         (block_x, block_y, ignore) = get_next_move(next_x, next_y, next_direction)
         prev_marker = map[block_y][block_x]
         map[block_y][block_x] = '#'
@@ -105,7 +105,7 @@ def traverse_the_map(x, y):
         
 
 
-with open("day06/sample.txt", "r", encoding="utf8") as file:
+with open("day06/sample_0.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
