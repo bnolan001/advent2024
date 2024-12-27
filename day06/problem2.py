@@ -87,7 +87,7 @@ def traverse_the_map(x, y):
         (block_x, block_y, ignore) = get_next_move(next_x, next_y, next_direction)
         prev_marker = map[block_y][block_x]
         map[block_y][block_x] = '#'
-        if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
+        if (prev_marker == '.' and (block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
             blockages.add((block_x, block_y))
             print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
         map[block_y][block_x] = prev_marker
@@ -105,7 +105,7 @@ def traverse_the_map(x, y):
         
 
 
-with open("day06/sample_0.txt", "r", encoding="utf8") as file:
+with open("day06/data.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
