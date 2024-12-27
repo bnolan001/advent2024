@@ -65,6 +65,7 @@ def can_loop_brute_force(x, y, direction):
             return True
         if (current_direction != next_direction):
             num_turns += 1
+            current_direction = next_direction
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, direction)
 
     return False
@@ -113,12 +114,12 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
             map[block_y][block_x] = 'O'
 
-        print("Step: ", unique_step_count)
-        #print_map()
+        print("\nStep: ", unique_step_count)
+        print_map()
        
     for line in map:
         total = line.count("O") + total
-
+print("--Completed--")
 print_map()
 print(total)  # 834 is too low
    
