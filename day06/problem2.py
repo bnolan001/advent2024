@@ -82,11 +82,11 @@ def traverse_the_map(x, y):
     direction = map[y][x]
     (next_x, next_y) = (x, y)
     while next_x != -1 and next_y != -1:
+        print_map()
         (block_x, block_y, ignore) = get_next_move(next_x, next_y, next_direction)
         if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
             blockages.add((block_x, block_y))
             print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
-            #print_map()
 
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
         (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
