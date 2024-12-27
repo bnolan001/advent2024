@@ -50,14 +50,16 @@ def can_loop_brute_force(x, y, direction):
 
     # simulate a blockage placed on the next move
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
+    visited = set()
     
     current_direction = next_direction
     while(next_x != -1 and next_y != -1):
         steps += 1
         # if we've reached our starting point or traversed too many steps, we've looped
-        if (next_x == x and next_y == y) or (steps > max_loop_steps):
+        if (next_x == x and next_y == y) or ((x,y) in visited):
             return True
         
+        visited.add((next_x, next_y))
         if (current_direction != next_direction):
             num_turns += 1
             current_direction = next_direction
