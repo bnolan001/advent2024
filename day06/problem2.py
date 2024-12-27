@@ -90,6 +90,7 @@ def traverse_the_map(x, y):
         
         if next_x == -1 or next_y == -1:
             continue
+        
         if map[next_y][next_x] == '.':
             unique_step_count += 1    
 
