@@ -56,7 +56,7 @@ def can_loop_brute_force(x, y, direction):
     num_turns = 0
     check_x = x + movement_config[direction]['move_x']
     check_y = y + movement_config[direction]['move_y']
-    if (check_x < 0 or check_y < 0  or check_y >= len(map) or check_x > len(map[check_y]) or map[y + movement_config[direction]['move_y']][x + movement_config[direction]['move_x']] not in ['.', '#']):
+    if (check_x < 0 or check_y < 0  or check_y >= len(map) or check_x >= len(map[check_y]) or map[y + movement_config[direction]['move_y']][x + movement_config[direction]['move_x']] not in ['.', '#']):
         return False
 
     # simulate a blockage placed on the next move
@@ -103,7 +103,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
         if (can_loop_brute_force(next_x, next_y, next_direction)):
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
             blockages += ((block_x, block_y), )
-            print_map()
+            #print_map()
 
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
         (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
