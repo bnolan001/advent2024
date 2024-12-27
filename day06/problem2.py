@@ -40,7 +40,6 @@ def get_next_move(x, y, direction):
     return (next_x, next_y, direction)
 
 def can_loop_brute_force(x, y, direction):
-    steps = 0
     check_x = x + movement_config[direction]['move_x']
     check_y = y + movement_config[direction]['move_y']
     # ignore out of bounds, or areas the guard has already walked
@@ -52,9 +51,7 @@ def can_loop_brute_force(x, y, direction):
     visited = set()
     
     while(next_x != -1 and next_y != -1):
-        steps += 1
-       
-        if (next_x == x and next_y == y) or ((next_x, next_y, next_direction) in visited):# or steps > max_loop_steps or (next_x == x and next_y == y) :
+        if (next_x == x and next_y == y) or ((next_x, next_y, next_direction) in visited):
             return True
         
         visited.add((next_x, next_y, next_direction))
@@ -78,15 +75,12 @@ def mark_the_map():
 map = []
 max_x = 0
 max_y = 0
-max_loop_steps = 0
-num_blockers = 0
 with open("day06/data.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
     for line in file:
         map += [list(line.strip())]
-        num_blockers += line.count("#")
         if ('v' in map[line_ct] or '^' in map[line_ct] or '<' in map[line_ct] or '>' in map[line_ct]):
             y = line_ct
             x = map[line_ct].index('v') if 'v' in map[line_ct] else map[line_ct].index('^') if '^' in map[line_ct] else map[line_ct].index('>') if '>' in map[line_ct] else map[line_ct].index('<')
