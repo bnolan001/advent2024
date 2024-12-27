@@ -76,8 +76,7 @@ def mark_the_map(prev_direction, next_direction, prev_x, prev_y, next_x, next_y)
 
 def traverse_the_map(x, y):
     unique_step_count = 1
-    direction = map[y][x]
-    next_direction = direction
+    next_direction = map[y][x]
     (next_x, next_y) = (x, y)
     while next_x != -1 and next_y != -1:
         (block_x, block_y, ignore) = get_next_move(next_x, next_y, next_direction)
