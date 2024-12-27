@@ -56,7 +56,7 @@ def can_loop_brute_force(x, y, direction):
     while(next_x != -1 and next_y != -1):
         steps += 1
        
-        if (next_x == x and next_y == y) or ((next_x, next_y) in visited):
+        if (next_x == x and next_y == y) or steps > max_loop_steps:
             return True
         
         visited.add((next_x, next_y))
