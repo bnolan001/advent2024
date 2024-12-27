@@ -71,7 +71,7 @@ def can_loop_brute_force(x, y, direction):
     return False
 
 map = []
-with open("day06/sample.txt", "r", encoding="utf8") as file:
+with open("day06/sample_3.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
