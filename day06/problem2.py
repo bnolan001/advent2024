@@ -32,8 +32,6 @@ def print_map():
 
 
 def get_next_move(x, y, direction):
-    next_x = x
-    next_y = y
     (next_x, next_y) = (x + movement_config[direction]['move_x'], y + movement_config[direction]['move_y'])
     
     if next_x < 0 or next_x >= max_x or next_y < 0 or next_y >= max_y:
@@ -48,8 +46,8 @@ def can_loop_brute_force(x, y, direction):
     check_x = x + movement_config[direction]['move_x']
     check_y = y + movement_config[direction]['move_y']
     # ignore out of bounds, or areas the guard has already walked
-    if (check_x < 0 or check_y < 0  or check_y >= max_y or check_x >= max_x or map[check_y][check_x] not in ['.']):
-        return False
+    #if (check_x < 0 or check_y < 0  or check_y >= max_y or check_x >= max_x or map[check_y][check_x] not in ['.']):
+    #    return False
 
     # simulate a blockage placed on the next move
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
@@ -84,7 +82,7 @@ def traverse_the_map(x, y):
     (next_x, next_y) = (x, y)
     (prev_x, prev_y) = (x, y)
     while next_x != -1 and next_y != -1:
-        (block_x, block_y) = (next_x + movement_config[next_direction]['move_x'], next_y + movement_config[next_direction]['move_y'])
+        (block_x, block_y, ignore) = get_next_move(next_x, next_y, next_direction)
         if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
             # Ignore walls and starting position
             if (map[block_y][block_x] not in [direction, '#']):
