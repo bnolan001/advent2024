@@ -98,7 +98,6 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
     while next_x != -1 and next_y != -1:
         if (can_loop_brute_force(next_x, next_y, next_direction)):
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
-            #map[block_y][block_x] = 'O'
             blockages += ((block_x, block_y, block_direction),)
             print_map()
 
@@ -109,6 +108,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
             continue
         if map[next_y][next_x] == '.':
             unique_step_count += 1
+            print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
 
         if (map[next_y][next_x] == direction) or (map[next_y][next_x] == 'O'):
             (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
@@ -124,7 +124,6 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
             map[next_y][next_x] = movement_config[next_direction]['marker']
 
         
-        print("\nStep: ", unique_step_count)
         
        
     #for line in map:
