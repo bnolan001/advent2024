@@ -51,7 +51,6 @@ def can_loop_brute_force(x, y, direction):
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
     visited = set()
     
-    current_direction = next_direction
     while(next_x != -1 and next_y != -1):
         steps += 1
        
@@ -85,7 +84,6 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
     max_y = len(map)
     max_loop_steps = max_x * max_y
     direction = map[y][x]
-    map[y][x] = direction
     prev_direction = direction
     next_direction = direction
     (next_x, next_y) = (x, y)
