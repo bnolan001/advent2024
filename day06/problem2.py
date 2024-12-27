@@ -40,12 +40,11 @@ def get_next_move(x, y, direction):
     return (next_x, next_y, direction)
 
 def can_loop_brute_force(x, y, direction):
-    num_turns = 0
     steps = 0
     check_x = x + movement_config[direction]['move_x']
     check_y = y + movement_config[direction]['move_y']
     # ignore out of bounds, or areas the guard has already walked
-    if (check_x < 0 or check_y < 0  or check_y >= max_y or check_x >= max_x or map[y + movement_config[direction]['move_y']][x + movement_config[direction]['move_x']] not in ['.']):
+    if (check_x < 0 or check_y < 0  or check_y >= max_y or check_x >= max_x or map[check_y][check_x] not in ['.']):
         return False
 
     # simulate a blockage placed on the next move
@@ -60,9 +59,6 @@ def can_loop_brute_force(x, y, direction):
             return True
         
         visited.add((next_x, next_y, next_direction))
-        if (current_direction != next_direction):
-            num_turns += 1
-            current_direction = next_direction
 
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)
 
