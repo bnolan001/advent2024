@@ -96,7 +96,7 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
     unique_step_count = 1
     blockages = ()
     while next_x != -1 and next_y != -1:        
-        if next_x == -1 and next_y == -1:
+        if next_x == -1 or next_y == -1:
             continue
 
         if map[next_y][next_x] == '.':
@@ -120,7 +120,7 @@ with open("day06/sample_3.txt", "r", encoding="utf8") as file:
             #map[block_y][block_x] = 'O'
             blockages += ((block_x, block_y, block_direction),)
             print_map()
-            
+
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
         (next_x, next_y, next_direction) = get_next_move(prev_x, prev_y, prev_direction) 
         print("\nStep: ", unique_step_count)
