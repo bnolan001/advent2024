@@ -84,12 +84,8 @@ def traverse_the_map(x, y):
     while next_x != -1 and next_y != -1:
         (block_x, block_y, ignore) = get_next_move(next_x, next_y, next_direction)
         if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
-            # Ignore walls and starting position
-            if (map[block_y][block_x] not in [direction, '#']):
-                blockages.add((block_x, block_y))
-
+            blockages.add((block_x, block_y))
             print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
-
             #print_map()
 
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
@@ -118,6 +114,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
     max_x = len(map[0])
     max_y = len(map)
     max_loop_steps = max_x * max_y
+    blockages.add((x, y))
     traverse_the_map(x, y)
 
 print("--Completed--")
@@ -125,6 +122,6 @@ for blockage in blockages:
     map[blockage[1]][blockage[0]] = 'O'
 
 print_map()
-print(len(blockages))  # 834, 1793, 1897 is too low, 1962 is too high
+print(len(blockages) - 1)  # 834, 1793, 1897 is too low, 1962 is too high
 
    
