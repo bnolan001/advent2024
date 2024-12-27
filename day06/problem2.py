@@ -113,7 +113,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
             unique_step_count += 1
             print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
 
-        if (map[next_y][next_x] == direction) or (map[next_y][next_x] == 'O'):
+        if (map[next_y][next_x] == direction):
             (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
             continue
         if (prev_direction != next_direction):
