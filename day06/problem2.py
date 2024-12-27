@@ -39,19 +39,6 @@ def get_next_move(x, y, direction):
 
     return (next_x, next_y, direction)
 
-def can_loop(x, y, direction):
-    turn = movement_config[direction]['turn']
-    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
-    # there is already a blockage on the next move
-    if (next_x == -1 and next_y == -1) or (direction != next_direction) or (map[next_y][next_x] != '.'):
-        return False
-    
-    (next_x, next_y, next_direction) = get_next_move(x, y, turn)
-    if(map[next_y][next_x] in ['+','|', '-']):
-        return True
-
-    return False
-
 def can_loop_brute_force(x, y, direction):
     num_turns = 0
     check_x = x + movement_config[direction]['move_x']
@@ -66,18 +53,18 @@ def can_loop_brute_force(x, y, direction):
 
     current_direction = next_direction
     while(next_x != -1 and next_y != -1):
-        if (next_x == x and next_y == y):
+        if (next_x == x and next_y == y or (next_x, next_y) in path):
             return True
         if (current_direction != next_direction):
             num_turns += 1
             current_direction = next_direction
-        path += ((next_x, next_y),)
+        path += (next_x, next_y)
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)
 
     return False
 
 map = []
-with open("day06/data.txt", "r", encoding="utf8") as file:
+with open("day06/sample.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
