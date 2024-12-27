@@ -49,12 +49,12 @@ def can_loop_brute_force(x, y, direction):
 
     # simulate a blockage placed on the next move
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
-    visited = set()
+    visited = set((x, y, direction))
     
     while(next_x != -1 and next_y != -1):
         steps += 1
        
-        if (next_x == x and next_y == y) or ((next_x, next_y, next_direction) in visited):# or steps > max_loop_steps:
+        if ((next_x, next_y, next_direction) in visited):# or steps > max_loop_steps or (next_x == x and next_y == y) :
             return True
         
         visited.add((next_x, next_y, next_direction))
@@ -119,8 +119,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
         if next_x == -1 or next_y == -1:
             continue
         if map[next_y][next_x] == '.':
-            unique_step_count += 1
-    
+            unique_step_count += 1    
 
         mark_the_map()
         
