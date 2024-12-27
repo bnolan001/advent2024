@@ -65,7 +65,7 @@ def can_loop_brute_force(x, y, direction):
         (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[movement_config[direction]['turn']])
 
     current_direction = next_direction
-    while(next_x != -1 and next_y != -1) and num_turns < 4:
+    while(next_x != -1 and next_y != -1):
         if (next_x == x and next_y == y):
             return True
         if (current_direction != next_direction):
@@ -76,7 +76,7 @@ def can_loop_brute_force(x, y, direction):
     return False
 
 map = []
-with open("day06/sample.txt", "r", encoding="utf8") as file:
+with open("day06/data.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
@@ -132,7 +132,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
 print("--Completed--")
 for blockage in blockages:
     map[blockage[1]][blockage[0]] = 'O'
-    
+
 print_map()
 print(len(blockages))  # 834 is too low
 
