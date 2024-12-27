@@ -48,10 +48,15 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     next_direction = map[y][x]
     map[y][x] = 'X'
     (next_x, next_y) = (x, y)
+    unique_step_count = 1
     while next_x != -1 and next_y != -1:        
         (next_x, next_y, next_direction) = get_next_move(next_x, next_y, next_direction)  
         if next_x == -1 and next_y == -1:
             continue
+
+
+        if map[next_y][next_x] == '.':
+            unique_step_count += 1
 
         map[next_y][next_x] = 'X'
        
