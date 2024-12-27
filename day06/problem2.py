@@ -65,7 +65,7 @@ def can_loop_brute_force(x, y, direction):
 
     return False
 
-def mark_the_map():  
+def mark_the_map(prev_direction, next_direction, prev_x, prev_y, next_x, next_y):  
     if (prev_direction != next_direction):
         map[next_y][next_x] = movement_config[next_direction]['marker']
         map[prev_y][prev_x] = '+'
@@ -102,7 +102,7 @@ def traverse_the_map(x, y):
         if map[next_y][next_x] == '.':
             unique_step_count += 1    
 
-        mark_the_map()
+        mark_the_map(prev_direction, next_direction, prev_x, prev_y, next_x, next_y)
         
 
 
