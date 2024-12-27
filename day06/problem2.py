@@ -3,6 +3,7 @@
 map = []
 max_x = 0
 max_y = 0
+direction = '^'
 blockages = set()
 movement_config = {
     '^': {'turn':'>',
@@ -78,6 +79,7 @@ def mark_the_map(prev_direction, next_direction, prev_x, prev_y, next_x, next_y)
 def traverse_the_map(x, y):
     unique_step_count = 1
     next_direction = map[y][x]
+    direction = map[y][x]
     (next_x, next_y) = (x, y)
     while next_x != -1 and next_y != -1:
         (block_x, block_y, ignore) = get_next_move(next_x, next_y, next_direction)
@@ -99,7 +101,7 @@ def traverse_the_map(x, y):
         
 
 
-with open("day06/data.txt", "r", encoding="utf8") as file:
+with open("day06/sample.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
@@ -117,10 +119,11 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
     traverse_the_map(x, y)
 
 print("--Completed--")
+blockages.remove((x, y))
 for blockage in blockages:
     map[blockage[1]][blockage[0]] = 'O'
-
+map[y][x] = direction
 print_map()
-print(len(blockages) - 1)  # 834, 1793, 1897 is too low, 1962 is too high
+print(len(blockages))  # 834, 1793, 1897 is too low, 1962 is too high
 
    
