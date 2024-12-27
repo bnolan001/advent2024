@@ -130,6 +130,10 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     #for line in map:
     #    total = line.count("O") + total
 print("--Completed--")
+for blockage in blockages:
+    map[blockage[1]][blockage[0]] = 'O'
+    
 print_map()
 print(len(blockages))  # 834 is too low
+
    
