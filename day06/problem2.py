@@ -100,7 +100,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
         (block_x, block_y) = (next_x + movement_config[direction]['move_x'], next_y + movement_config[direction]['move_y'])
         if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
             
-            if (map[block_y][block_x] not in ['^', '#']):
+            #if (map[block_y][block_x] not in ['^', '#']):
                 blockages += ((block_x, block_y), )
             #print_map()
 
