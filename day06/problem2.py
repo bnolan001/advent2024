@@ -56,7 +56,7 @@ def can_loop_brute_force(x, y, direction):
     while(next_x != -1 and next_y != -1):
         steps += 1
        
-        if (next_x == x and next_y == y) or steps > max_loop_steps:
+        if (next_x == x and next_y == y) or (next_x, next_y) in visited or steps > max_loop_steps:
             return True
         
         visited.add((next_x, next_y))
@@ -87,7 +87,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
 
     max_x = len(map[0])
     max_y = len(map)
-    max_loop_steps = max_x * max_y * 40
+    max_loop_steps = max_x * max_y
     direction = map[y][x]
     map[y][x] = direction
     prev_direction = direction
@@ -97,9 +97,10 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
     unique_step_count = 1
     blockages = ()
     while next_x != -1 and next_y != -1:
-        if (can_loop_brute_force(next_x, next_y, next_direction)):
-            (block_x, block_y) = (next_x + movement_config[direction]['move_x'], next_y + movement_config[direction]['move_y'])
-            if (map[block_y][block_x] not in ['^', '#']) and (block_x, block_y) not in blockages:
+        (block_x, block_y) = (next_x + movement_config[direction]['move_x'], next_y + movement_config[direction]['move_y'])
+        if ((block_x, block_y) not in blockages and can_loop_brute_force(next_x, next_y, next_direction)):
+            
+            if (map[block_y][block_x] not in ['^', '#']):
                 blockages += ((block_x, block_y), )
             #print_map()
 
