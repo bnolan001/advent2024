@@ -87,7 +87,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
 
     max_x = len(map[0])
     max_y = len(map)
-    max_loop_steps = max_x * max_y
+    max_loop_steps = max_x * max_y * 40
     direction = map[y][x]
     map[y][x] = direction
     prev_direction = direction
