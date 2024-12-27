@@ -39,6 +39,19 @@ def get_next_move(x, y, direction):
 
     return (next_x, next_y, direction)
 
+def can_loop(x, y, direction):
+    turn = movement_config[direction]['turn']
+    (next_x, next_y, next_direction) = get_next_move(x, y, direction)
+    # there is already a blockage on the next move
+    if (next_x == -1 and next_y == -1) or (direction != next_direction) or (map[next_y][next_x] != '.'):
+        return False
+    
+    (next_x, next_y, next_direction) = get_next_move(x, y, turn)
+    if(map[next_y][next_x] in ['+','|', '-']):
+        return True
+
+    return False
+
 def can_loop_brute_force(x, y, direction):
     num_turns = 0
     check_x = x + movement_config[direction]['move_x']
@@ -46,6 +59,7 @@ def can_loop_brute_force(x, y, direction):
     if (check_x < 0 or check_y < 0  or check_y >= len(map) or check_x > len(map[check_y]) or map[y + movement_config[direction]['move_y']][x + movement_config[direction]['move_x']] not in ['.', '#']):
         return False
     path =((x,y),)
+
     # simulate a blockage placed on the next move
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
     if (map[next_y][next_x] == '#'):
@@ -53,7 +67,7 @@ def can_loop_brute_force(x, y, direction):
 
     current_direction = next_direction
     while(next_x != -1 and next_y != -1):
-        if (next_x == x and next_y == y or (next_x, next_y) in path):
+        if (next_x == x and next_y == y):
             return True
         if (current_direction != next_direction):
             num_turns += 1
@@ -86,7 +100,7 @@ with open("day06/sample.txt", "r", encoding="utf8") as file:
     while next_x != -1 and next_y != -1:
         if (can_loop_brute_force(next_x, next_y, next_direction)):
             (block_x, block_y, block_direction) = get_next_move(next_x, next_y, next_direction)
-            blockages+=((block_x, block_y),)
+            blockages += ((block_x, block_y), )
             print_map()
 
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
