@@ -74,6 +74,7 @@ def mark_the_map():
     else:
         map[next_y][next_x] = movement_config[next_direction]['marker']
 
+
 map = []
 max_x = 0
 max_y = 0
@@ -119,9 +120,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
             continue
         if map[next_y][next_x] == '.':
             unique_step_count += 1
-        
-        if (map[next_y][next_x] == direction):
-            (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
+    
 
         mark_the_map()
         
