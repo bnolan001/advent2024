@@ -31,7 +31,7 @@ def get_next_move(x, y, direction):
     next_y = y
     (next_x, next_y) = (x + movement_config[direction]['move_x'], y + movement_config[direction]['move_y'])
     
-    if next_x < 0 or next_x >= len(map[0]) or next_y < 0 or next_y >= len(map):
+    if next_x < 0 or next_x >= max_x or next_y < 0 or next_y >= max_y:
         return (-1, -1, 'O')
     
     if map[next_y][next_x] == "#":
@@ -56,14 +56,12 @@ def can_loop_brute_force(x, y, direction):
     num_turns = 0
     check_x = x + movement_config[direction]['move_x']
     check_y = y + movement_config[direction]['move_y']
-    if (check_x < 0 or check_y < 0  or check_y >= len(map) or check_x >= len(map[check_y]) or map[y + movement_config[direction]['move_y']][x + movement_config[direction]['move_x']] not in ['.', '#']):
+    if (check_x < 0 or check_y < 0  or check_y >= max_y or check_x >= max_x or map[y + movement_config[direction]['move_y']][x + movement_config[direction]['move_x']] not in ['.', '#']):
         return False
 
     # simulate a blockage placed on the next move
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
-    #if (map[next_y][next_x] == '#'):
-   #     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[movement_config[direction]['turn']])
-
+    
     current_direction = next_direction
     while(next_x != -1 and next_y != -1 and num_turns < num_blockers):
         if (next_x == x and next_y == y):
@@ -78,8 +76,10 @@ def can_loop_brute_force(x, y, direction):
     return False
 
 map = []
+max_x = 0
+max_y = 0
 num_blockers = 0
-with open("day06/data.txt", "r", encoding="utf8") as file:
+with open("day06/sample_3.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
@@ -91,6 +91,8 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
             x = map[line_ct].index('v') if 'v' in map[line_ct] else map[line_ct].index('^') if '^' in map[line_ct] else map[line_ct].index('>') if '>' in map[line_ct] else map[line_ct].index('<')
         line_ct += 1
 
+    max_x = len(map[0])
+    max_y = len(map)
     direction = map[y][x]
     map[y][x] = direction
     prev_direction = direction
