@@ -43,8 +43,8 @@ def get_next_move(x, y, direction):
     return (next_x, next_y, direction)
 
 def can_loop_brute_force(x, y, direction):
-    check_x = x + movement_config[direction]['move_x']
-    check_y = y + movement_config[direction]['move_y']
+    #check_x = x + movement_config[direction]['move_x']
+    #check_y = y + movement_config[direction]['move_y']
     # ignore out of bounds, or areas the guard has already walked
     #if (check_x < 0 or check_y < 0  or check_y >= max_y or check_x >= max_x or map[check_y][check_x] not in ['.']):
     #    return False
