@@ -61,8 +61,8 @@ def can_loop_brute_force(x, y, direction):
 
     # simulate a blockage placed on the next move
     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[direction]['turn'])
-    if (map[next_y][next_x] == '#'):
-        (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[movement_config[direction]['turn']])
+    #if (map[next_y][next_x] == '#'):
+   #     (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[movement_config[direction]['turn']])
 
     current_direction = next_direction
     while(next_x != -1 and next_y != -1 and num_turns < num_blockers):
@@ -137,6 +137,6 @@ for blockage in blockages:
     map[blockage[1]][blockage[0]] = 'O'
 
 print_map()
-print(len(blockages))  # 834 is too low
+print(len(blockages))  # 834, 1793 is too low
 
    
