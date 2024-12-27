@@ -99,7 +99,7 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
     while next_x != -1 and next_y != -1:
         if (can_loop_brute_force(next_x, next_y, next_direction)):
             (block_x, block_y) = (next_x + movement_config[direction]['move_x'], next_y + movement_config[direction]['move_y'])
-            if (map[block_y][block_x] not in ['^', '#']):
+            if (map[block_y][block_x] not in ['^', '#']) and (block_x, block_y) not in blockages:
                 blockages += ((block_x, block_y), )
             #print_map()
 
@@ -135,6 +135,6 @@ for blockage in blockages:
     map[blockage[1]][blockage[0]] = 'O'
 
 print_map()
-print(len(blockages))  # 834, 1793 is too low, 2006 is incorrect (not sure if too high or low)
+print(len(blockages))  # 834, 1793 is too low, 1962 is too high
 
    
