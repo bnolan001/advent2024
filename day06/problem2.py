@@ -65,7 +65,7 @@ def can_loop_brute_force(x, y, direction):
         (next_x, next_y, next_direction) = get_next_move(x, y, movement_config[movement_config[direction]['turn']])
 
     current_direction = next_direction
-    while(next_x != -1 and next_y != -1):
+    while(next_x != -1 and next_y != -1 and num_turns < num_blockers):
         if (next_x == x and next_y == y):
             return True
         
@@ -78,12 +78,14 @@ def can_loop_brute_force(x, y, direction):
     return False
 
 map = []
+num_blockers = 0
 with open("day06/data.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
     for line in file:
         map += [list(line.strip())]
+        num_blockers += line.count("#")
         if ('v' in map[line_ct] or '^' in map[line_ct] or '<' in map[line_ct] or '>' in map[line_ct]):
             y = line_ct
             x = map[line_ct].index('v') if 'v' in map[line_ct] else map[line_ct].index('^') if '^' in map[line_ct] else map[line_ct].index('>') if '>' in map[line_ct] else map[line_ct].index('<')
