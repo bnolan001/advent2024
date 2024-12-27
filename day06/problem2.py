@@ -68,6 +68,7 @@ def can_loop_brute_force(x, y, direction):
     while(next_x != -1 and next_y != -1):
         if (next_x == x and next_y == y):
             return True
+        
         if (current_direction != next_direction):
             num_turns += 1
             current_direction = next_direction
@@ -77,7 +78,7 @@ def can_loop_brute_force(x, y, direction):
     return False
 
 map = []
-with open("day06/sample.txt", "r", encoding="utf8") as file:
+with open("day06/data.txt", "r", encoding="utf8") as file:
     total = 0
     (x, y) = (0, 0)
     line_ct = 0
