@@ -63,6 +63,17 @@ def can_loop_brute_force(x, y, direction):
 
     return False
 
+def mark_the_map(x, y, direction):  
+    if (prev_direction != next_direction):
+        map[next_y][next_x] = movement_config[next_direction]['marker']
+        map[prev_y][prev_x] = '+'
+    elif (map[next_y][next_x] == '.'):
+        map[next_y][next_x] = movement_config[next_direction]['marker']
+    elif (map[next_y][next_x] != movement_config[next_direction]['marker']):
+        map[next_y][next_x] = '+'
+    else:
+        map[next_y][next_x] = movement_config[next_direction]['marker']
+
 map = []
 max_x = 0
 max_y = 0
@@ -108,20 +119,12 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
             continue
         if map[next_y][next_x] == '.':
             unique_step_count += 1
-
-        # Mark the map with the direction
+        
         if (map[next_y][next_x] == direction):
             (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
-            continue
-        if (prev_direction != next_direction):
-            map[next_y][next_x] = movement_config[next_direction]['marker']
-            map[prev_y][prev_x] = '+'
-        elif (map[next_y][next_x] == '.'):
-            map[next_y][next_x] = movement_config[next_direction]['marker']
-        elif (map[next_y][next_x] != movement_config[next_direction]['marker']):
-            map[next_y][next_x] = '+'
-        else:
-            map[next_y][next_x] = movement_config[next_direction]['marker']
+
+        mark_the_map(next_y, next_x, next_direction)
+        
 
 print("--Completed--")
 for blockage in blockages:
