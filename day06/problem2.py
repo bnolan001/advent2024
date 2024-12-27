@@ -128,6 +128,6 @@ for blockage in blockages:
     map[blockage[1]][blockage[0]] = 'O'
 map[y][x] = direction
 print_map()
-print(len(blockages))  # 834, 1793, 1897 is too low, 1962 is too high
+print(len(blockages))
 
    
