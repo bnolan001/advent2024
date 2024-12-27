@@ -102,6 +102,9 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
             # Ignore walls and starting position
             if (map[block_y][block_x] not in [direction, '#']):
                 blockages.add((block_x, block_y))
+
+            print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
+
             #print_map()
 
         (prev_x, prev_y, prev_direction) = (next_x, next_y, next_direction)
@@ -111,7 +114,6 @@ with open("day06/data.txt", "r", encoding="utf8") as file:
             continue
         if map[next_y][next_x] == '.':
             unique_step_count += 1
-            print("\nStep: ", unique_step_count, "Blockages: ", len(blockages))
 
         # Mark the map with the direction
         if (map[next_y][next_x] == direction):
