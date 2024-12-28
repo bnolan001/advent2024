@@ -4,14 +4,14 @@ def build_operations(equation):
     actions = ['+', '*']
     operations = [] * (len(equation) - 1)
     
-    total_checks = 2 ** (len(equation) - 2)
+    total_checks = len(actions) ** (len(equation) - 2)
     for current_power in range(1, len(equation) - 1):
         pair_actions = []
         ct = 1
         action_index = 0
         current_action = actions[action_index]
         for i in range(total_checks):
-            if ct > (2 ** current_power / 2):
+            if ct > (len(actions) ** current_power / 2):
                 ct = 1
                 action_index += 1
                 if action_index == 2:

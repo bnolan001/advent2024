@@ -11,7 +11,7 @@ def build_operations(equation):
         action_index = 0
         current_action = actions[action_index]
         for i in range(total_checks):
-            if ct > (len(actions) ** current_power / 2):
+            if ct > (len(actions) ** current_power / 3):
                 ct = 1
                 action_index += 1
                 if action_index == len(actions):
@@ -20,8 +20,8 @@ def build_operations(equation):
             pair_actions.append(current_action)
             ct += 1
         operations.append(pair_actions)
-    print()
-    print(equation, "\n", operations)
+    #print()
+    #print(equation, "\n", operations)
     return operations
 
 def is_valid(equation, operations):
@@ -45,7 +45,7 @@ def check_equations():
         operations = build_operations(equation)
         if is_valid(equation, operations):
             total += equation[0]
-            print("Valid", equation, "New total", total)
+            #print("Valid", equation, "New total", total)
             
     return total
 
