@@ -61,6 +61,5 @@ with open("day07/data.txt", "r", encoding="utf8") as file:
     
     total = check_equations()
 
-print(total)  # 142858630051415 is too low
-              # 
+print(total)  
    
