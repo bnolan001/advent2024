@@ -7,10 +7,10 @@ def print_map(map):
     for line in map:
         print("".join(line))
 
-def mark_antinodes_on_line(i, j, node):
+def mark_antinodes_on_line(i, j, node, main_map):
     new_nodes = 0
-    for k in range(j+1, len(scan[i])):
-        if scan[i][k] == node:
+    for k in range(j+1, len(main_map[i])):
+        if main_map[i][k] == node:
             x_axis = k - j
             ant_j = j - x_axis
             while ant_j >= 0:
@@ -19,23 +19,23 @@ def mark_antinodes_on_line(i, j, node):
                 merged_nodes[i][ant_j] = "#"#node
                 ant_j = ant_j - x_axis
             ant_j = k + x_axis
-            while ant_j < len(scan[i]):
+            while ant_j < len(main_map[i]):
                 new_nodes += 1
                 antinodes[i][ant_j] = "#"#node
                 merged_nodes[i][ant_j] = "#"#node
                 ant_j = ant_j + x_axis
     return new_nodes
 
-def mark_antinodes_later_in_scan(y, x, node):
+def mark_antinodes_later_in_scan(y, x, node, main_map):
     new_nodes = 0
-    for k in range(y+1, len(scan)):
-        for l in range(len(scan[k])):
-            if scan[k][l] == node:
+    for k in range(y+1, len(main_map)):
+        for l in range(len(main_map[k])):
+            if main_map[k][l] == node:
                 x_axis = l - x
                 y_axis = k - y
                 ant_x = x - x_axis
                 ant_y = y - y_axis
-                while ant_x >= 0 and ant_y >= 0 and ant_x < len(scan[k]) and ant_y < len(scan):
+                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
                     new_nodes += 1
                     antinodes[ant_y][ant_x] = "#"#node
                     merged_nodes[ant_y][ant_x] = "#"#node
@@ -43,7 +43,7 @@ def mark_antinodes_later_in_scan(y, x, node):
                     ant_y = ant_y - y_axis
                 ant_x = l + x_axis
                 ant_y = k + y_axis
-                while ant_x >= 0 and ant_y >= 0 and ant_x < len(scan[k]) and ant_y < len(scan):
+                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
                     new_nodes += 1
                     antinodes[ant_y][ant_x] = "#"#node
                     merged_nodes[ant_y][ant_x] = "#"#node
@@ -52,16 +52,16 @@ def mark_antinodes_later_in_scan(y, x, node):
     return new_nodes
        
 
-def find_antinodes():
+def find_antinodes(main_map):
     new_nodes = 0
-    for i in range(len(scan)):
-        for j in range(len(scan[i])):
-            if scan[i][j] != ".":
-                node = scan[i][j]
+    for i in range(len(main_map)):
+        for j in range(len(main_map[i])):
+            if main_map[i][j] != ".":
+                node = main_map[i][j]
                 # check remaining line for the same node
-                new_nodes += mark_antinodes_on_line(i, j, node)
+                new_nodes += mark_antinodes_on_line(i, j, node, main_map)
                 # check for nodes down the scan
-                new_nodes += mark_antinodes_later_in_scan(i, j, node)
+                new_nodes += mark_antinodes_later_in_scan(i, j, node, main_map)
     
     return new_nodes
 
@@ -83,7 +83,7 @@ with open("day08/sample.txt", "r", encoding="utf8") as file:
         merged_nodes.append(list(line.strip()))
 
     print("------Initialized------")
-    total = find_antinodes()
+    total = find_antinodes(scan)
     get_antinodes_count()
     
     print("------Post Find Nodes------")
