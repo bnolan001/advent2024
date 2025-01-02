@@ -92,7 +92,7 @@ with open("day08/sample.txt", "r", encoding="utf8") as file:
     print(total)
     
     print()
-    total = find_antinodes(antinodes)
+    total = find_antinodes(merged_nodes)
     print("------Post Find Antinodes second run------")
     print_map(antinodes)
     print("------Post Find Merged second run------")
