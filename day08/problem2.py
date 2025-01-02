@@ -84,6 +84,7 @@ with open("day08/sample.txt", "r", encoding="utf8") as file:
 
     print("------Initialized------")
     total = find_antinodes(scan)
+    total = find_antinodes(antinodes)
     get_antinodes_count()
     
     print("------Post Find Nodes------")
