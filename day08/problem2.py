@@ -35,7 +35,7 @@ def mark_antinodes_later_in_scan(y, x, node, main_map):
                 y_axis = k - y
                 ant_x = x - x_axis
                 ant_y = y - y_axis
-                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
+                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map) and antinodes[ant_y][ant_x] != node:
                     new_nodes += 1
                     antinodes[ant_y][ant_x] = node
                     merged_nodes[ant_y][ant_x] = node
@@ -43,7 +43,7 @@ def mark_antinodes_later_in_scan(y, x, node, main_map):
                     ant_y = ant_y - y_axis
                 ant_x = l + x_axis
                 ant_y = k + y_axis
-                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
+                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map) and antinodes[ant_y][ant_x] != node:
                     new_nodes += 1
                     antinodes[ant_y][ant_x] = node
                     merged_nodes[ant_y][ant_x] = node
