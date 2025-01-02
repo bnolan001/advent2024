@@ -85,7 +85,9 @@ with open("day08/sample.txt", "r", encoding="utf8") as file:
     total = find_antinodes(scan)
     print("------Post Find Antinodes------")
     print_map(antinodes)
-    print()
+    
+    print("------Post Find Merged second------")
+    print_map(merged_nodes)
     print("------Antinodes Count------")
     print(total)
     
@@ -93,6 +95,8 @@ with open("day08/sample.txt", "r", encoding="utf8") as file:
     total = find_antinodes(antinodes)
     print("------Post Find Antinodes second run------")
     print_map(antinodes)
+    print("------Post Find Merged second run------")
+    print_map(merged_nodes)
     print()
     print("------Antinodes Count second run------")
     print(total)
