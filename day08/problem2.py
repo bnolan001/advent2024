@@ -35,7 +35,7 @@ def mark_antinodes_later_in_scan(y, x, node, main_map):
                 y_axis = k - y
                 ant_x = x - x_axis
                 ant_y = y - y_axis
-                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):# and main_map[ant_y][ant_x] != node:
+                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
                     new_nodes += 1
                     antinodes[ant_y][ant_x] = node
                     merged_nodes[ant_y][ant_x] = node
@@ -43,7 +43,7 @@ def mark_antinodes_later_in_scan(y, x, node, main_map):
                     ant_y = ant_y - y_axis
                 ant_x = l + x_axis
                 ant_y = k + y_axis
-                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):# and main_map[ant_y][ant_x] != node:
+                while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
                     new_nodes += 1
                     antinodes[ant_y][ant_x] = node
                     merged_nodes[ant_y][ant_x] = node
@@ -54,22 +54,22 @@ def mark_antinodes_later_in_scan(y, x, node, main_map):
 
 def find_antinodes(main_map):
     new_nodes = 0
-    for i in range(len(main_map)):
-        for j in range(len(main_map[i])):
-            if main_map[i][j] != ".":
-                node = main_map[i][j]
+    for y in range(len(main_map)):
+        for x in range(len(main_map[y])):
+            if main_map[y][x] != ".":
+                node = main_map[y][x]
                 # check remaining line for the same node
-                new_nodes += mark_antinodes_on_line(i, j, node, main_map)
+                new_nodes += mark_antinodes_on_line(y, x, node, main_map)
                 # check for nodes down the scan
-                new_nodes += mark_antinodes_later_in_scan(i, j, node, main_map)
+                new_nodes += mark_antinodes_later_in_scan(y, x, node, main_map)
     
     return new_nodes
 
 def get_antinodes_count():
     total = 0
-    for i in range(len(antinodes)):
-        for j in range(len(antinodes[i])):
-            if antinodes[i][j] != ".":
+    for y in range(len(antinodes)):
+        for x in range(len(antinodes[y])):
+            if antinodes[y][x] != ".":
                 total += 1
     return total
 
