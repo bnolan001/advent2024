@@ -73,7 +73,7 @@ def get_antinodes_count():
                 total += 1
     return total
 
-with open("day08/sample_9.txt", "r", encoding="utf8") as file:
+with open("day08/sample.txt", "r", encoding="utf8") as file:
     total = 0
     for line in file:
         if line.strip() == "":
@@ -97,16 +97,16 @@ with open("day08/sample_9.txt", "r", encoding="utf8") as file:
     print()
     print("------Antinodes Count second run------")
     print(get_antinodes_count())
-    print("------Post Find Nodes------")
+    # print("------Post Find Nodes------")
 
-    print()
-    print("------Original------")
-    print_map(scan)
-    print()
-    print("------Antinodes------")
-    print_map(antinodes)
-    print()
-    print("------Merged Notes------")
-    print_map(merged_nodes)
+    # print()
+    # print("------Original------")
+    # print_map(scan)
+    # print()
+    # print("------Antinodes------")
+    # print_map(antinodes)
+    # print()
+    # print("------Merged Notes------")
+    # print_map(merged_nodes)
 
 print(total)  
