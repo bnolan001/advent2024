@@ -11,7 +11,7 @@ def mark_antinodes_on_line(i, j, node):
             x_axis = k - j
             ant_j = j - x_axis
             if ant_j >= 0:
-                antinodes[i][ant_j] = "#"#node
+                antinodes[i][ant_j] = "#"
             ant_j = k + x_axis
             if ant_j < len(scan[i]):
                 antinodes[i][ant_j] = "#"
@@ -67,4 +67,4 @@ with open("day08/data.txt", "r", encoding="utf8") as file:
     print()
     print_map(antinodes)
 
-print(total)  # 272 is too high
+print(total)  
