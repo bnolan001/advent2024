@@ -27,7 +27,6 @@ def mark_antinodes_on_line(i, j, node, main_map):
     return new_nodes
 
 def mark_antinodes_vertically(y, x, node, main_map):
-    new_nodes = 0
     for k in range(y+1, len(main_map)):
         for l in range(len(main_map[k])):
             if main_map[k][l] == node:
@@ -38,7 +37,6 @@ def mark_antinodes_vertically(y, x, node, main_map):
                 antinodes[y][x] = node
                 antinodes[k][l] = node
                 while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
-                    new_nodes += 1
                     antinodes[ant_y][ant_x] = node
                     merged_nodes[ant_y][ant_x] = node
                     ant_x = ant_x - x_axis
@@ -46,26 +44,22 @@ def mark_antinodes_vertically(y, x, node, main_map):
                 ant_x = l + x_axis
                 ant_y = k + y_axis
                 while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
-                    new_nodes += 1
                     antinodes[ant_y][ant_x] = node
                     merged_nodes[ant_y][ant_x] = node
                     ant_x = ant_x + x_axis
                     ant_y = ant_y + y_axis
-    return new_nodes
        
 
 def find_antinodes(main_map):
-    new_nodes = 0
     for y in range(len(main_map)):
         for x in range(len(main_map[y])):
             if main_map[y][x] != ".":
                 node = main_map[y][x]
                 # check remaining line for the same node
-                #new_nodes += mark_antinodes_on_line(y, x, node, main_map)
+                #mark_antinodes_on_line(y, x, node, main_map)
                 # check for nodes down the scan
-                new_nodes += mark_antinodes_vertically(y, x, node, main_map)
+                mark_antinodes_vertically(y, x, node, main_map)
     
-    return new_nodes
 
 def get_antinodes_count():
     total = 0
@@ -74,7 +68,7 @@ def get_antinodes_count():
 
     return total
 
-with open("day08/sample.txt", "r", encoding="utf8") as file:
+with open("day08/data.txt", "r", encoding="utf8") as file:
     total = 0
     for line in file:
         if line.strip() == "":
@@ -85,10 +79,10 @@ with open("day08/sample.txt", "r", encoding="utf8") as file:
 
     print("------Original Scan------")
     print_map(scan)
-    total = find_antinodes(scan)
+    find_antinodes(scan)
     print("------Post Find Antinodes------")
     print_map(antinodes)
-    
+    total = get_antinodes_count()
     print("------Antinodes Count------")
     print(total)
     print()
