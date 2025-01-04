@@ -59,7 +59,7 @@ def find_antinodes(main_map):
             if main_map[y][x] != ".":
                 node = main_map[y][x]
                 # check remaining line for the same node
-                new_nodes += mark_antinodes_on_line(y, x, node, main_map)
+                #new_nodes += mark_antinodes_on_line(y, x, node, main_map)
                 # check for nodes down the scan
                 new_nodes += mark_antinodes_later_in_scan(y, x, node, main_map)
     
@@ -82,24 +82,27 @@ with open("day08/sample.txt", "r", encoding="utf8") as file:
         antinodes.append(['.']*len(scan[0]))
         merged_nodes.append(list(line.strip()))
 
+    print("------Original Scan------")
+    print_map(scan)
     total = find_antinodes(scan)
     print("------Post Find Antinodes------")
     print_map(antinodes)
     
-    print("------Post Find Merged second------")
-    print_map(merged_nodes)
     print("------Antinodes Count------")
     print(total)
-    
     print()
-    total = find_antinodes(merged_nodes)
-    print("------Post Find Antinodes second run------")
-    print_map(antinodes)
-    print("------Post Find Merged second run------")
+    print("------Post Find Merged second------")
     print_map(merged_nodes)
-    print()
-    print("------Antinodes Count second run------")
-    print(total)
+    
+    # print()
+    # total = find_antinodes(merged_nodes)
+    # print("------Post Find Antinodes second run------")
+    # print_map(antinodes)
+    # print("------Post Find Merged second run------")
+    # print_map(merged_nodes)
+    # print()
+    # print("------Antinodes Count second run------")
+    # print(total)
     # print("------Post Find Nodes------")
 
     # print()
