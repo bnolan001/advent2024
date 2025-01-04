@@ -1,7 +1,5 @@
 scan = []
 antinodes = []
-merged_nodes = []
-
 
 def print_map(map):
     for line in map:
@@ -19,14 +17,12 @@ def mark_antinodes_vertically(y, x, node, main_map):
                 antinodes[k][l] = node
                 while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
                     antinodes[ant_y][ant_x] = node
-                    merged_nodes[ant_y][ant_x] = node
                     ant_x = ant_x - x_axis
                     ant_y = ant_y - y_axis
                 ant_x = l + x_axis
                 ant_y = k + y_axis
                 while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
                     antinodes[ant_y][ant_x] = node
-                    merged_nodes[ant_y][ant_x] = node
                     ant_x = ant_x + x_axis
                     ant_y = ant_y + y_axis
        
@@ -53,7 +49,6 @@ with open("day08/data.txt", "r", encoding="utf8") as file:
             continue
         scan.append(list(line.strip()))
         antinodes.append(['.']*len(scan[0]))
-        merged_nodes.append(list(line.strip()))
 
     find_antinodes(scan)
     total = get_antinodes_count()   
