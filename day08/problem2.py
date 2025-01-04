@@ -70,9 +70,8 @@ def find_antinodes(main_map):
 def get_antinodes_count():
     total = 0
     for y in range(len(antinodes)):
-        for x in range(len(antinodes[y])):
-            if antinodes[y][x] != ".":
-                total += 1
+        total += len(antinodes[y]) - antinodes[y].count(".")
+
     return total
 
 with open("day08/sample.txt", "r", encoding="utf8") as file:
