@@ -35,6 +35,8 @@ def mark_antinodes_vertically(y, x, node, main_map):
                 y_axis = k - y
                 ant_x = x - x_axis
                 ant_y = y - y_axis
+                antinodes[y][x] = node
+                antinodes[k][l] = node
                 while ant_x >= 0 and ant_y >= 0 and ant_x < len(main_map[k]) and ant_y < len(main_map):
                     new_nodes += 1
                     antinodes[ant_y][ant_x] = node
