@@ -26,7 +26,7 @@ def mark_antinodes_on_line(i, j, node, main_map):
                 ant_j = ant_j + x_axis
     return new_nodes
 
-def mark_antinodes_later_in_scan(y, x, node, main_map):
+def mark_antinodes_vertically(y, x, node, main_map):
     new_nodes = 0
     for k in range(y+1, len(main_map)):
         for l in range(len(main_map[k])):
@@ -61,7 +61,7 @@ def find_antinodes(main_map):
                 # check remaining line for the same node
                 #new_nodes += mark_antinodes_on_line(y, x, node, main_map)
                 # check for nodes down the scan
-                new_nodes += mark_antinodes_later_in_scan(y, x, node, main_map)
+                new_nodes += mark_antinodes_vertically(y, x, node, main_map)
     
     return new_nodes
 
@@ -91,8 +91,8 @@ with open("day08/sample.txt", "r", encoding="utf8") as file:
     print("------Antinodes Count------")
     print(total)
     print()
-    print("------Post Find Merged second------")
-    print_map(merged_nodes)
+    # print("------Post Find Merged second------")
+    # print_map(merged_nodes)
     
     # print()
     # total = find_antinodes(merged_nodes)
