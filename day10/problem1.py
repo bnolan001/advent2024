@@ -1,6 +1,6 @@
 def print_map(map):
     for line in map:
-        print("".join(line))
+        print("".join([str(x) for x in line]))
 
 with open("day10/sample.txt", "r", encoding="utf8") as file:
     map = []
