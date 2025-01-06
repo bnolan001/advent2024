@@ -35,19 +35,14 @@ with open("day11/data.txt", "r", encoding="utf8") as file:
     for line in file:
         data = [int(x) for x in line.strip().split()]
 
-    print(data)
     new_stones = {}
     for value in data:
         new_stones[value] = 1
 
     for i in range(75):
         new_stones = blink(new_stones)
-        
-        print(f"{datetime.now()} step {i} length {len(new_stones)}")
-        #print(new_stones)
-    
+            
     for key, value in new_stones.items():
-        print(f"{key} {value}")
         total += value
 
     print(total)
