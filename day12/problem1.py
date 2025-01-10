@@ -60,7 +60,7 @@ def calculate_pricing(data, distinct_plants):
     
     return plant_data
 
-with open("day12/sample.txt", "r", encoding="utf8") as file:
+with open("day12/sample_1.txt", "r", encoding="utf8") as file:
     data = []
     distinct_plants = {"*"}
     total = 0
