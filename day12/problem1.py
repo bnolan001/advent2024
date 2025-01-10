@@ -8,7 +8,7 @@ def map_plant_area(data, y, x, recorded_plants):
     plant = data[y][x]
     recorded_plants.add((y, x))
     perimeter = 0
-    area = 0
+    area = 1
     if (y + 1, x) not in recorded_plants:
         if data[y + 1][x] != plant:
             perimeter += 1
