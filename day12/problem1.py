@@ -47,14 +47,16 @@ def map_plant_area(data, y, x, recorded_plants):
 
     return (area, perimeter)
 
-def calculate_pricing(data, distinct_plants):
+def calculate_pricing(data):
     plant_data = []
     recorded_plants = set()
     for y in range(1, len(data) - 1):
         for x in range(1, len(data[y]) - 1): 
             if (y, x) in recorded_plants:
                 continue
-            result = map_plant_area(data, y, x, recorded_plants)
+            related_plants = set()
+            result = map_plant_area(data, y, x, related_plants)
+            recorded_plants.update(related_plants)
             plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1]})
                     
     
@@ -75,7 +77,7 @@ with open("day12/sample.txt", "r", encoding="utf8") as file:
     data.append(['*'] * (len(line) + 1))
     print_map(data)
     
-    plant_data = calculate_pricing(data, distinct_plants)
+    plant_data = calculate_pricing(data)
 
     print(plant_data)
 
