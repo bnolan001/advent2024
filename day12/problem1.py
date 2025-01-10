@@ -13,7 +13,7 @@ def map_plant_area(data, y, x, recorded_plants):
         if data[y + 1][x] != plant:
             perimeter += 1
         else:
-            area += 1
+            #area += 1
             result = map_plant_area(data, y + 1, x, recorded_plants)
             area += result[0]
             perimeter += result[1]
@@ -22,7 +22,7 @@ def map_plant_area(data, y, x, recorded_plants):
         if data[y - 1][x] != plant:
             perimeter += 1
         else:
-            area += 1
+            #area += 1
             result = map_plant_area(data, y - 1, x, recorded_plants)
             area += result[0]
             perimeter += result[1]
@@ -31,7 +31,7 @@ def map_plant_area(data, y, x, recorded_plants):
         if data[y][x + 1] != plant:
             perimeter += 1
         else:
-            area += 1
+            #area += 1
             result = map_plant_area(data, y, x + 1, recorded_plants)
             area += result[0]
             perimeter += result[1]
@@ -40,7 +40,7 @@ def map_plant_area(data, y, x, recorded_plants):
         if data[y][x - 1] != plant:
             perimeter += 1
         else:
-            area += 1
+            #area += 1
             result = map_plant_area(data, y, x - 1, recorded_plants)
             area += result[0]
             perimeter += result[1]
@@ -60,7 +60,7 @@ def calculate_pricing(data, distinct_plants):
     
     return plant_data
 
-with open("day12/sample_1.txt", "r", encoding="utf8") as file:
+with open("day12/sample.txt", "r", encoding="utf8") as file:
     data = []
     distinct_plants = {"*"}
     total = 0
