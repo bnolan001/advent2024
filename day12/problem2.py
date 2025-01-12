@@ -101,7 +101,6 @@ def calculate_pricing(data):
             walls = find_border_walls(border)
             plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "border": border, "walls":walls})
                     
-    print(perimeters)
     return plant_data
 
 with open("day12/sample.txt", "r", encoding="utf8") as file:
@@ -118,8 +117,9 @@ with open("day12/sample.txt", "r", encoding="utf8") as file:
     data.append(['*'] * (len(data[0])))
     
     plant_data = calculate_pricing(data)
+    print(plant_data)
 
     for plant in plant_data:
-        total += plant["area"] * plant["perimeter"]
+        total += plant["area"] * plant["walls"]
 
     print(total)
