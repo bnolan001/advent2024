@@ -4,7 +4,7 @@ def print_map(map):
     
     print()
 
-def map_plant_area(data, y, x, recorded_plants, plant_perimeters):
+def map_plant_area(data, y, x, recorded_plants, border):
     plant = data[y][x]
     recorded_plants.add((y, x))
     perimeter = 0
@@ -12,36 +12,36 @@ def map_plant_area(data, y, x, recorded_plants, plant_perimeters):
     if (y + 1, x) not in recorded_plants:
         if data[y + 1][x] != plant:
             perimeter += 1
-            plant_perimeters.add((y,x))
+            border.add((y,x))
         else:
-            result = map_plant_area(data, y + 1, x, recorded_plants, plant_perimeters)
+            result = map_plant_area(data, y + 1, x, recorded_plants, border)
             area += result[0]
             perimeter += result[1]
 
     if (y - 1, x) not in recorded_plants:
         if data[y - 1][x] != plant:
             perimeter += 1
-            plant_perimeters.add((y,x))
+            border.add((y,x))
         else:
-            result = map_plant_area(data, y - 1, x, recorded_plants, plant_perimeters)
+            result = map_plant_area(data, y - 1, x, recorded_plants, border)
             area += result[0]
             perimeter += result[1]
 
     if (y, x + 1) not in recorded_plants:        
         if data[y][x + 1] != plant:
             perimeter += 1
-            plant_perimeters.add((y,x))
+            border.add((y,x))
         else:
-            result = map_plant_area(data, y, x + 1, recorded_plants, plant_perimeters)
+            result = map_plant_area(data, y, x + 1, recorded_plants, border)
             area += result[0]
             perimeter += result[1]
     
     if (y, x - 1) not in recorded_plants:
         if data[y][x - 1] != plant:
             perimeter += 1
-            plant_perimeters.add((y,x))
+            border.add((y,x))
         else:
-            result = map_plant_area(data, y, x - 1, recorded_plants, plant_perimeters)
+            result = map_plant_area(data, y, x - 1, recorded_plants, border)
             area += result[0]
             perimeter += result[1]
 
@@ -56,11 +56,10 @@ def calculate_pricing(data):
             if (y, x) in recorded_plants:
                 continue
             related_plants = set()
-            plant_perimeters = set()
-            result = map_plant_area(data, y, x, related_plants, plant_perimeters)
+            border = set()
+            result = map_plant_area(data, y, x, related_plants, border)
             recorded_plants.update(related_plants)
-            plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1]})
-            perimeters.append({"plant": data[y][x], "plant_perimeter": plant_perimeters})
+            plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "border": border})
                     
     print(perimeters)
     return plant_data
