@@ -47,6 +47,45 @@ def map_plant_area(data, y, x, recorded_plants, border):
 
     return (area, perimeter)
 
+def find_border_walls(border):
+    walls = 0
+    visited_points = set()
+    direction = '>'
+    starting_point = border[0]
+    for point in border:
+        if starting_point > point:
+            starting_point = point
+
+    visited_points.add((starting_point[0], starting_point[1], direction))
+    current_point = (starting_point[0], starting_point[1])
+    while True:
+        if direction == '>':
+            next_point = (current_point[0], current_point[1] + 1)
+        elif direction == '<':
+            next_point = (current_point[0], current_point[1] - 1)
+        elif direction == '^':
+            next_point = (current_point[0] - 1, current_point[1])
+        elif direction == 'v':
+            next_point = (current_point[0] + 1, current_point[1])
+
+        if (next_point[0], next_point[1], direction) in visited_points:
+            break
+
+        visited_points.add((current_point[0], current_point[1], direction))
+        if next_point in border:
+            current_point = next_point
+        else:            
+            walls += 1
+            if direction == '>':
+                direction = 'v'
+            elif direction == 'v':
+                direction = '<'
+            elif direction == '<':
+                direction = '^'
+            elif direction == '^':
+                direction = '>'
+    return walls
+
 def calculate_pricing(data):
     plant_data = []
     perimeters = []
@@ -59,7 +98,8 @@ def calculate_pricing(data):
             border = set()
             result = map_plant_area(data, y, x, related_plants, border)
             recorded_plants.update(related_plants)
-            plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "border": border})
+            walls = find_border_walls(border)
+            plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "border": border, "walls":walls})
                     
     print(perimeters)
     return plant_data
