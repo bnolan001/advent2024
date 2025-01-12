@@ -51,7 +51,7 @@ def find_border_walls(border):
     walls = 0
     visited_points = set()
     direction = '>'
-    starting_point = border[0]
+    starting_point = border.first()
     for point in border:
         if starting_point > point:
             starting_point = point
@@ -88,7 +88,6 @@ def find_border_walls(border):
 
 def calculate_pricing(data):
     plant_data = []
-    perimeters = []
     recorded_plants = set()
     for y in range(1, len(data) - 1):
         for x in range(1, len(data[y]) - 1): 
