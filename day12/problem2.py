@@ -152,6 +152,12 @@ def count_corners(related_plants, map):
         
         if map[upper_right_point[0]][upper_right_point[1]] == plant and map[upper_point[0]][upper_point[1]] != plant:
             corners += 1
+        
+        if map[down_left_point[0]][down_left_point[1]] == plant and map[down_point[0]][down_point[1]] != plant:
+            corners += 1
+        
+        if map[down_right_point[0]][down_right_point[1]] == plant and map[down_point[0]][down_point[1]] != plant:
+            corners += 1
 
     return corners
 
@@ -173,7 +179,7 @@ def calculate_pricing(data):
                     
     return plant_data
 
-with open("day12/sample.txt", "r", encoding="utf8") as file:
+with open("day12/data.txt", "r", encoding="utf8") as file:
     data = []
     distinct_plants = {"*"}
     total = 0
