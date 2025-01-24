@@ -174,12 +174,12 @@ def calculate_pricing(data):
             recorded_plants.update(related_plants)
             walls = count_border_walls(related_plants)
             corners = count_corners(related_plants, data)
-            print("Plant: ", data[y][x], "Area: ", result[0], "Perimeter: ", result[1], "Border: ", border, "Walls: ", walls, "Corners:", corners)
+            print("Plant: ", data[y][x], "Area: ", result[0], "Perimeter: ", result[1], "Walls: ", walls, "Corners:", corners)
             plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "border": border, "walls":walls, "corners": corners})
                     
     return plant_data
 
-with open("day12/sample_1.txt", "r", encoding="utf8") as file:
+with open("day12/sample_2.txt", "r", encoding="utf8") as file:
     data = []
     distinct_plants = {"*"}
     total = 0
