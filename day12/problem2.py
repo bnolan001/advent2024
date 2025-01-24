@@ -71,7 +71,7 @@ def map_plant_area(data, y, x, recorded_plants, border):
 
     return (area, perimeter)
 
-def find_border_walls(border):
+def count_border_walls(border):
     walls = 0
     visited_points = set()
     direction = '>'
@@ -118,6 +118,33 @@ def find_border_walls(border):
                 
     return walls
 
+def count_corners(related_plants, map):
+    starting_point = next(iter(related_plants))
+    for point in related_plants:
+        if starting_point[0] >= point[0] and starting_point[1] >= point[1]:
+            starting_point = point
+    plant = map[starting_point[0]][starting_point[1]]
+    corners = 0
+    for point in related_plants:
+        left_point = (point[0], point[1] - 1)
+        right_point = (point[0], point[1] + 1)
+        up_point = (point[0] -1, point[1])
+        down_point = (point[0] + 1, point[1])
+
+        if map[up_point[0]][up_point[1]] != plant and map[left_point[0]][left_point[1]] != plant:
+            corners += 1
+
+        if  map[up_point[0]][up_point[1]] != plant and map[right_point[0]][right_point[1]] != plant:
+            corners += 1
+
+        if map[down_point[0]][down_point[1]] != plant and map[left_point[0]][left_point[1]] != plant:
+            corners += 1
+
+        if  map[down_point[0]][down_point[1]] != plant and map[right_point[0]][right_point[1]] != plant:
+            corners += 1
+
+    return corners
+
 def calculate_pricing(data):
     plant_data = []
     recorded_plants = set()
@@ -129,9 +156,10 @@ def calculate_pricing(data):
             border = set()
             result = map_plant_area(data, y, x, related_plants, border)
             recorded_plants.update(related_plants)
-            walls = find_border_walls(related_plants)
+            walls = count_border_walls(related_plants)
+            corners = count_corners(related_plants, data)
             print("Plant: ", data[y][x], "Area: ", result[0], "Perimeter: ", result[1], "Border: ", border, "Walls: ", walls)
-            plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "border": border, "walls":walls})
+            plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "border": border, "walls":walls, "corners": corners})
                     
     return plant_data
 
