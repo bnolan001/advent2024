@@ -81,14 +81,15 @@ def find_border_walls(border):
             starting_point = point
 
     current_point = (starting_point[0], starting_point[1])
-    direction_steps = 0
+    first_step = True
     while True:
         if (current_point[0], current_point[1], direction) in visited_points:
-            if direction_steps == 0:
-                walls += 1
-            elif direction_steps == 1 and walls % 2 == 1:
+            if walls % 2 == 1:
                 walls -= 1
             break
+
+        if first_step:
+            walls += 1
 
         visited_points.add((current_point[0], current_point[1], direction))
         movement_order_index = movement_order.index(direction)
@@ -98,23 +99,22 @@ def find_border_walls(border):
         if left_point in border:
             direction = movement_order[movement_order_index - 1]
             current_point = left_point
-            walls += 1
-            direction_steps = 1
+            first_step = True
         elif next_point in border:
             current_point = next_point
-            direction_steps += 1
+            first_step = False
         else: 
-
+            first_step = True
             for i in range(1,4):
-                direction_steps = 0
                 next_dir_index = (movement_order_index + i) % 4
                 test_point = (current_point[0] + movement[movement_order[next_dir_index]]["y"], current_point[1] + movement[movement_order[next_dir_index]]["x"])                
-                walls += 1
+                
                 if test_point in border:
-                    direction_steps += 1
                     direction = movement_order[next_dir_index]
-                    
+                    current_point = test_point
                     break
+                
+                walls += 1
                 
     return walls
 
@@ -135,7 +135,7 @@ def calculate_pricing(data):
                     
     return plant_data
 
-with open("day12/sample.txt", "r", encoding="utf8") as file:
+with open("day12/sample_3.txt", "r", encoding="utf8") as file:
     data = []
     distinct_plants = {"*"}
     total = 0
