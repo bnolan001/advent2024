@@ -138,8 +138,8 @@ def count_corners(related_plants, map):
 
         #  X
         # XA
-        if (map[upper_point[0]][upper_point[1]] != plant and 
-            map[left_point[0]][left_point[1]] != plant):
+        if ((upper_point[0],upper_point[1]) not in related_plants and 
+            (left_point[0],left_point[1]) not in related_plants):
             corners += 1
             corner_points.add((point, corners))
 
