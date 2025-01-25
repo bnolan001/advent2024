@@ -157,22 +157,22 @@ def count_corners(related_plants, map):
 
         # AA
         # XA
-        if map[upper_left_point[0]][upper_left_point[1]] == plant and map[upper_point[0]][upper_point[1]] != plant:
+        if map[upper_left_point[0]][upper_left_point[1]] == plant and upper_left_point in related_plants and map[upper_point[0]][upper_point[1]] != plant:
             corners += 1
         
         # AA
         # AX
-        if map[upper_right_point[0]][upper_right_point[1]] == plant and map[upper_point[0]][upper_point[1]] != plant:
+        if map[upper_right_point[0]][upper_right_point[1]] == plant and upper_right_point in related_plants and map[upper_point[0]][upper_point[1]] != plant:
             corners += 1
         
         # XA
         # AA
-        if map[down_left_point[0]][down_left_point[1]] == plant and map[down_point[0]][down_point[1]] != plant:
+        if map[down_left_point[0]][down_left_point[1]] == plant and down_left_point in related_plants and map[down_point[0]][down_point[1]] != plant:
             corners += 1
         
         # AX
         # AA
-        if map[down_right_point[0]][down_right_point[1]] == plant and map[down_point[0]][down_point[1]] != plant:
+        if map[down_right_point[0]][down_right_point[1]] == plant and down_right_point in related_plants and map[down_point[0]][down_point[1]] != plant:
             corners += 1
 
     return corners
