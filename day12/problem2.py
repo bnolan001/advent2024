@@ -196,7 +196,7 @@ def count_corners(related_plants, map):
             corners += 1
             corner_points.add((point, down_right_point))
 
-    print(plant, "Corners: ", corner_points)
+    print(plant, "Corner Points: ", corner_points, "Total:", len(corner_points))
     return corners
 
 def calculate_pricing(data):
@@ -217,7 +217,7 @@ def calculate_pricing(data):
                     
     return plant_data
 
-with open("day12/sample_5.txt", "r", encoding="utf8") as file:
+with open("day12/sample_6.txt", "r", encoding="utf8") as file:
     data = []
     distinct_plants = {"*"}
     total = 0
