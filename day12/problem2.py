@@ -125,6 +125,7 @@ def count_corners(related_plants, map):
             starting_point = point
     plant = map[starting_point[0]][starting_point[1]]
     corners = 0
+    corner_points = []
     for point in related_plants:
         left_point = (point[0], point[1] - 1)
         right_point = (point[0], point[1] + 1)
@@ -140,24 +141,28 @@ def count_corners(related_plants, map):
         if (map[upper_point[0]][upper_point[1]] != plant and 
             map[left_point[0]][left_point[1]] != plant):
             corners += 1
+            corner_points.append(point)
 
         # X
         # AX
         if ( map[upper_point[0]][upper_point[1]] != plant and 
             map[right_point[0]][right_point[1]] != plant):
             corners += 1
+            corner_points.append(point)
 
         # XA
         #  X
         if (map[down_point[0]][down_point[1]] != plant and 
             map[left_point[0]][left_point[1]] != plant):
             corners += 1
+            corner_points.append(point)
 
         # AX
         # X
         if  (map[down_point[0]][down_point[1]] != plant and 
              map[right_point[0]][right_point[1]] != plant):
             corners += 1
+            corner_points.append(point)
 
         # aX
         #  A
@@ -165,6 +170,7 @@ def count_corners(related_plants, map):
             upper_left_point in related_plants and 
             map[upper_point[0]][upper_point[1]] != plant):
             corners += 1
+            corner_points.append(point)
         
         # Xa
         # A
@@ -172,6 +178,7 @@ def count_corners(related_plants, map):
             upper_right_point in related_plants and 
             map[upper_point[0]][upper_point[1]] != plant):
             corners += 1
+            corner_points.append(point)
         
         #  A
         # aX
@@ -179,6 +186,7 @@ def count_corners(related_plants, map):
             down_left_point in related_plants and 
             map[down_point[0]][down_point[1]] != plant):
             corners += 1
+            corner_points.append(point)
         
         # A
         # Xa
@@ -186,7 +194,9 @@ def count_corners(related_plants, map):
             down_right_point in related_plants and 
             map[down_point[0]][down_point[1]] != plant):
             corners += 1
+            corner_points.append(point)
 
+    print(plant, "Corners: ", corner_points)
     return corners
 
 def calculate_pricing(data):
