@@ -138,61 +138,57 @@ def count_corners(related_plants, map):
 
         #  X
         # XA
-        if ((upper_point[0],upper_point[1]) not in related_plants and 
-            (left_point[0],left_point[1]) not in related_plants):
+        if (upper_point not in related_plants and 
+            left_point not in related_plants):
             corners += 1
             corner_points.add((point, corners))
 
         # X
         # AX
-        if ( (upper_point[0],upper_point[1]) not in related_plants and 
-            (right_point[0],right_point[1]) not in related_plants):
+        if (upper_point not in related_plants and 
+            right_point not in related_plants):
             corners += 1
             corner_points.add((point, corners))
 
         # XA
         #  X
-        if ((down_point[0],down_point[1]) not in related_plants and 
-            (left_point[0],left_point[1]) not in related_plants):
+        if (down_point not in related_plants and 
+            left_point not in related_plants):
             corners += 1
             corner_points.add((point, corners))
 
         # AX
         # X
-        if  ((down_point[0],down_point[1]) not in related_plants and 
-             (right_point[0],right_point[1]) not in related_plants):
+        if (down_point not in related_plants and 
+            right_point not in related_plants):
             corners += 1
             corner_points.add((point, corners))
 
         # aX
         #  A
-        if (map[upper_left_point[0]][upper_left_point[1]] == plant and 
-            upper_left_point in related_plants and 
-            map[upper_point[0]][upper_point[1]] != plant):
+        if (upper_left_point in related_plants and 
+            upper_point not in related_plants):
             corners += 1
             corner_points.add((upper_left_point, point))
         
         # Xa
         # A
-        if (map[upper_right_point[0]][upper_right_point[1]] == plant and 
-            upper_right_point in related_plants and 
-            map[upper_point[0]][upper_point[1]] != plant):
+        if (upper_right_point in related_plants and 
+            upper_point not in related_plants):
             corners += 1
             corner_points.add((upper_right_point, point))
         
         #  A
         # aX
-        if ( map[down_left_point[0]][down_left_point[1]] == plant and 
-            down_left_point in related_plants and 
-            map[down_point[0]][down_point[1]] != plant):
+        if (down_left_point in related_plants and 
+            down_point not in related_plants):
             corners += 1
             corner_points.add((point, down_left_point))
         
         # A
         # Xa
-        if (map[down_right_point[0]][down_right_point[1]] == plant and 
-            down_right_point in related_plants and 
-            map[down_point[0]][down_point[1]] != plant):
+        if (down_right_point in related_plants and 
+            down_point not in related_plants):
             corners += 1
             corner_points.add((point, down_right_point))
 
