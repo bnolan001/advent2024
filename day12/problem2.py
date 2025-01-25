@@ -208,7 +208,7 @@ def calculate_pricing(data):
                     
     return plant_data
 
-with open("day12/sample_6.txt", "r", encoding="utf8") as file:
+with open("day12/data.txt", "r", encoding="utf8") as file:
     data = []
     distinct_plants = {"*"}
     total = 0
@@ -226,4 +226,4 @@ with open("day12/sample_6.txt", "r", encoding="utf8") as file:
     for plant in plant_data:
         total += plant["area"] * plant["corners"]
 
-    print(total) # 852420 is too low, 879720 is too high
+    print(total) 
