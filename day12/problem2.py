@@ -135,28 +135,53 @@ def count_corners(related_plants, map):
         down_left_point = (point[0] + 1, point[1] - 1)
         down_right_point = (point[0] + 1, point[1] + 1)
 
-        if upper_point not in related_plants and left_point not in related_plants:
+        #if upper_point not in related_plants and left_point not in related_plants:
+        #    corners += 1
+
+        #if upper_point not in related_plants and right_point not in related_plants:
+        #    corners += 1
+
+        #if down_point not in related_plants and left_point not in related_plants:
+        #    corners += 1
+
+        #if down_point not in related_plants and right_point not in related_plants:
+        #    corners += 1
+        
+        #if upper_left_point not in related_plants and upper_point not in related_plants:
+        #    corners += 1
+        
+        #if upper_right_point not in related_plants and upper_point not in related_plants:
+        #    corners += 1
+        
+        #if down_left_point not in related_plants and down_point not in related_plants:
+        #    corners += 1
+        
+        #if down_right_point not in related_plants and down_point not in related_plants:
+        #   corners += 1
+####################
+
+        if upper_point not in related_plants and left_point not in related_plants and map[upper_point[0]][upper_point[1]] != plant and map[left_point[0]][left_point[1]] != plant:
             corners += 1
 
-        if upper_point not in related_plants and right_point not in related_plants:
+        if upper_point not in related_plants and right_point not in related_plants and map[upper_point[0]][upper_point[1]] != plant and map[right_point[0]][right_point[1]] != plant:
             corners += 1
 
-        if down_point not in related_plants and left_point not in related_plants:
+        if down_point not in related_plants and left_point not in related_plants and map[down_point[0]][down_point[1]] != plant and map[left_point[0]][left_point[1]] != plant:
             corners += 1
 
-        if down_point not in related_plants and right_point not in related_plants:
+        if down_point not in related_plants and right_point not in related_plants and map[down_point[0]][down_point[1]] != plant and map[right_point[0]][right_point[1]] != plant:
             corners += 1
         
-        if upper_left_point not in related_plants and upper_point not in related_plants:
+        if upper_left_point not in related_plants and upper_point not in related_plants and map[upper_left_point[0]][upper_left_point[1]] == plant and map[upper_point[0]][upper_point[1]] != plant:
             corners += 1
         
-        if upper_right_point not in related_plants and upper_point not in related_plants:
+        if upper_right_point not in related_plants and upper_point not in related_plants and map[upper_right_point[0]][upper_right_point[1]] == plant and map[upper_point[0]][upper_point[1]] != plant:
             corners += 1
         
-        if down_left_point not in related_plants and down_point not in related_plants:
+        if down_left_point not in related_plants and down_point not in related_plants and map[down_left_point[0]][down_left_point[1]] == plant and map[down_point[0]][down_point[1]] != plant:
             corners += 1
         
-        if down_right_point not in related_plants and down_point not in related_plants:
+        if down_right_point not in related_plants and down_point not in related_plants and map[down_right_point[0]][down_right_point[1]] == plant and map[down_point[0]][down_point[1]] != plant:
             corners += 1
 
     return corners
