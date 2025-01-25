@@ -135,27 +135,43 @@ def count_corners(related_plants, map):
         down_left_point = (point[0] + 1, point[1] - 1)
         down_right_point = (point[0] + 1, point[1] + 1)
 
+        #  X
+        # XA
         if map[upper_point[0]][upper_point[1]] != plant and map[left_point[0]][left_point[1]] != plant:
             corners += 1
 
+        # X
+        # AX
         if  map[upper_point[0]][upper_point[1]] != plant and map[right_point[0]][right_point[1]] != plant:
             corners += 1
 
+        # XA
+        #  X
         if map[down_point[0]][down_point[1]] != plant and map[left_point[0]][left_point[1]] != plant:
             corners += 1
 
+        # AX
+        # X
         if  map[down_point[0]][down_point[1]] != plant and map[right_point[0]][right_point[1]] != plant:
             corners += 1
-        
+
+        # AA
+        # XA
         if map[upper_left_point[0]][upper_left_point[1]] == plant and map[upper_point[0]][upper_point[1]] != plant:
             corners += 1
         
+        # AA
+        # AX
         if map[upper_right_point[0]][upper_right_point[1]] == plant and map[upper_point[0]][upper_point[1]] != plant:
             corners += 1
         
+        # XA
+        # AA
         if map[down_left_point[0]][down_left_point[1]] == plant and map[down_point[0]][down_point[1]] != plant:
             corners += 1
         
+        # AX
+        # AA
         if map[down_right_point[0]][down_right_point[1]] == plant and map[down_point[0]][down_point[1]] != plant:
             corners += 1
 
