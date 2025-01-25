@@ -28,7 +28,7 @@ movement = {
 }
 movement_order = [">", "v", "<", "^"]
 
-def map_plant_area(data, y, x, recorded_plants, border):
+def map_plant_area(data, y, x, recorded_plants):
     plant = data[y][x]
     recorded_plants.add((y, x))
     perimeter = 0
@@ -36,36 +36,32 @@ def map_plant_area(data, y, x, recorded_plants, border):
     if (y + 1, x) not in recorded_plants:
         if data[y + 1][x] != plant:
             perimeter += 1
-            border.add((y,x))
         else:
-            result = map_plant_area(data, y + 1, x, recorded_plants, border)
+            result = map_plant_area(data, y + 1, x, recorded_plants)
             area += result[0]
             perimeter += result[1]
 
     if (y - 1, x) not in recorded_plants:
         if data[y - 1][x] != plant:
             perimeter += 1
-            border.add((y,x))
         else:
-            result = map_plant_area(data, y - 1, x, recorded_plants, border)
+            result = map_plant_area(data, y - 1, x, recorded_plants)
             area += result[0]
             perimeter += result[1]
 
     if (y, x + 1) not in recorded_plants:        
         if data[y][x + 1] != plant:
             perimeter += 1
-            border.add((y,x))
         else:
-            result = map_plant_area(data, y, x + 1, recorded_plants, border)
+            result = map_plant_area(data, y, x + 1, recorded_plants)
             area += result[0]
             perimeter += result[1]
     
     if (y, x - 1) not in recorded_plants:
         if data[y][x - 1] != plant:
             perimeter += 1
-            border.add((y,x))
         else:
-            result = map_plant_area(data, y, x - 1, recorded_plants, border)
+            result = map_plant_area(data, y, x - 1, recorded_plants)
             area += result[0]
             perimeter += result[1]
 
@@ -153,7 +149,7 @@ def calculate_pricing(data):
             related_plants = set()
             result = map_plant_area(data, y, x, related_plants)
             recorded_plants.update(related_plants)
-            corners = count_corners(related_plants, data)
+            corners = count_corners(related_plants)
             plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "corners": corners})
                     
     return plant_data
