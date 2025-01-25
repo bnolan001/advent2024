@@ -123,76 +123,71 @@ def count_corners(related_plants, map):
     for point in related_plants:
         if starting_point[0] >= point[0] and starting_point[1] >= point[1]:
             starting_point = point
-    plant = map[starting_point[0]][starting_point[1]]
     corners = 0
-    corner_points = set()
     for point in related_plants:
         left_point = (point[0], point[1] - 1)
         right_point = (point[0], point[1] + 1)
-        upper_point = (point[0] -1, point[1])
+        upper_point = (point[0] - 1, point[1])
         down_point = (point[0] + 1, point[1])
         upper_left_point = (point[0] - 1, point[1] - 1)
         upper_right_point = (point[0] - 1, point[1] + 1)
         down_left_point = (point[0] + 1, point[1] - 1)
         down_right_point = (point[0] + 1, point[1] + 1)
 
+        ### Ouside Corners
         #  X
         # XA
         if (upper_point not in related_plants and 
             left_point not in related_plants):
             corners += 1
-            corner_points.add((point, corners))
 
         # X
         # AX
         if (upper_point not in related_plants and 
             right_point not in related_plants):
             corners += 1
-            corner_points.add((point, corners))
 
         # XA
         #  X
         if (down_point not in related_plants and 
             left_point not in related_plants):
             corners += 1
-            corner_points.add((point, corners))
 
         # AX
         # X
         if (down_point not in related_plants and 
             right_point not in related_plants):
             corners += 1
-            corner_points.add((point, corners))
 
+        ### Inside Corners
         # aX
-        #  A
+        # aA
         if (upper_left_point in related_plants and 
+            left_point in related_plants and
             upper_point not in related_plants):
             corners += 1
-            corner_points.add((upper_left_point, point))
         
         # Xa
-        # A
+        # Aa
         if (upper_right_point in related_plants and 
+            right_point in related_plants and
             upper_point not in related_plants):
             corners += 1
-            corner_points.add((upper_right_point, point))
         
-        #  A
+        # aA
         # aX
         if (down_left_point in related_plants and 
+            left_point in related_plants and
             down_point not in related_plants):
             corners += 1
-            corner_points.add((point, down_left_point))
         
-        # A
+        # Aa
         # Xa
         if (down_right_point in related_plants and 
+            right_point in related_plants and
             down_point not in related_plants):
             corners += 1
-            corner_points.add((point, down_right_point))
 
-    print(plant, "Corner Points: ", corner_points, "Total:", len(corner_points))
     return corners
 
 def calculate_pricing(data):
