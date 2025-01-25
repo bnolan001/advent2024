@@ -71,54 +71,7 @@ def map_plant_area(data, y, x, recorded_plants, border):
 
     return (area, perimeter)
 
-def count_border_walls(border):
-    walls = 0
-    visited_points = set()
-    direction = '>'
-    starting_point = next(iter(border))
-    for point in border:
-        if starting_point[0] >= point[0] and starting_point[1] >= point[1]:
-            starting_point = point
-
-    current_point = (starting_point[0], starting_point[1])
-    first_step = True
-    while True:
-        if (current_point[0], current_point[1], direction) in visited_points:
-            if walls % 2 == 1:
-                walls -= 1
-            break
-
-        if first_step:
-            walls += 1
-
-        visited_points.add((current_point[0], current_point[1], direction))
-        movement_order_index = movement_order.index(direction)
-        next_point = (current_point[0] + movement[direction]["y"], current_point[1] + movement[direction]["x"])
-        left_point = (current_point[0] + movement[movement_order[movement_order_index - 1]]["y"], current_point[1] + movement[movement_order[movement_order_index - 1]]["x"])
-        
-        if left_point in border:
-            direction = movement_order[movement_order_index - 1]
-            current_point = left_point
-            first_step = True
-        elif next_point in border:
-            current_point = next_point
-            first_step = False
-        else: 
-            first_step = True
-            for i in range(1,4):
-                next_dir_index = (movement_order_index + i) % 4
-                test_point = (current_point[0] + movement[movement_order[next_dir_index]]["y"], current_point[1] + movement[movement_order[next_dir_index]]["x"])                
-                
-                if test_point in border:
-                    direction = movement_order[next_dir_index]
-                    current_point = test_point
-                    break
-                
-                walls += 1
-                
-    return walls
-
-def count_corners(related_plants, map):
+def count_corners(related_plants):
     starting_point = next(iter(related_plants))
     for point in related_plants:
         if starting_point[0] >= point[0] and starting_point[1] >= point[1]:
@@ -198,13 +151,10 @@ def calculate_pricing(data):
             if (y, x) in recorded_plants:
                 continue
             related_plants = set()
-            border = set()
-            result = map_plant_area(data, y, x, related_plants, border)
+            result = map_plant_area(data, y, x, related_plants)
             recorded_plants.update(related_plants)
-            walls = count_border_walls(related_plants)
             corners = count_corners(related_plants, data)
-            print("Plant: ", data[y][x], "Area: ", result[0], "Perimeter: ", result[1], "Walls: ", walls, "Corners:", corners)
-            plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "border": border, "walls":walls, "corners": corners})
+            plant_data.append({"plant": data[y][x], "area": result[0], "perimeter": result[1], "corners": corners})
                     
     return plant_data
 
