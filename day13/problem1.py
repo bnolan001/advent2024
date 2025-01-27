@@ -3,7 +3,9 @@ with open("day13/sample.txt", "r", encoding="utf8") as file:
     data = []
     total = 0
     for line in file:
-        splitLine = line.split()
+        if ':' not in line:
+            continue
+        splitLine = line.split(' ')
         game = {}
         if "A" in splitLine[1]:
             x = int(splitLine[2].split('+')[1].replace(',', ''))
