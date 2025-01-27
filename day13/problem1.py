@@ -1,6 +1,6 @@
 
-def calculate_game_play(game):
-    totalPlays = game["Prize"]["X"] + game["Prize"]["Y"]
+def calculate_game_button_presses(game):
+    buttonPresses = {}
     for a in range(0, game["Prize"]["X"] // game["A"]["X"]):
         for b in range(0, game["Prize"]["Y"] // game["B"]["X"]):
             if (a == 0 and b == 0 or
@@ -13,13 +13,14 @@ def calculate_game_play(game):
             if (game["Prize"]["X"] == xMovement and
                 game["Prize"]["Y"] == yMovement):
                 if (numberOfPlays < totalPlays):
-                    totalPlays = numberOfPlays
-    return totalPlays
+                    buttonPresses["A"] = a
+                    buttonPresses["B"] = b
+    return buttonPresses
 
 def process_games(data):
     totalPlays = []
     for game in data:
-        totalPlays.append(calculate_game_play(game))
+        totalPlays.append(calculate_game_button_presses(game))
     print(totalPlays)
     return totalPlays
 
