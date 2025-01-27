@@ -9,11 +9,9 @@ def calculate_game_play(game):
 
             xMovement = a * game["A"]["X"] + b * game["B"]["X"]
             yMovement = a * game["A"]["Y"] + b * game["B"]["Y"]
-            numberOfPlays = game["Prize"]["Y"] / yMovement
-            if (game["Prize"]["X"] % xMovement and
-                game["Prize"]["Y"] % yMovement == 0 and
-                game["Prize"]["X"] // xMovement ==
-                game["Prize"]["Y"] // yMovement):
+            numberOfPlays = a + b
+            if (game["Prize"]["X"] == xMovement and
+                game["Prize"]["Y"] == yMovement):
                 if (numberOfPlays < totalPlays):
                     totalPlays = numberOfPlays
     return totalPlays
