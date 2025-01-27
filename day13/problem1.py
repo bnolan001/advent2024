@@ -3,9 +3,10 @@ def calculate_game_play(game):
     totalPlays = game["Prize"]["X"] + game["Prize"]["Y"]
     for a in range(0, game["Prize"]["X"] // game["A"]["X"]):
         for b in range(0, game["Prize"]["Y"] // game["B"]["X"]):
-            if a == 0 and b == 0:
+            if (a == 0 and b == 0 or
+                a == 0 and b > 1):
                 continue
-            
+
             xMovement = a * game["A"]["X"] + b * game["B"]["X"]
             yMovement = a * game["A"]["Y"] + b * game["B"]["Y"]
             numberOfPlays = game["Prize"]["Y"] / yMovement
