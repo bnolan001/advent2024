@@ -1,6 +1,7 @@
 
 def calculate_game_button_presses(game):
     buttonPresses = {}
+    minCost = 100000000000
     for a in range(0, game["Prize"]["X"] // game["A"]["X"]):
         for b in range(0, game["Prize"]["Y"] // game["B"]["X"]):
             if (a == 0 and b == 0 or
@@ -9,10 +10,10 @@ def calculate_game_button_presses(game):
 
             xMovement = a * game["A"]["X"] + b * game["B"]["X"]
             yMovement = a * game["A"]["Y"] + b * game["B"]["Y"]
-            numberOfPlays = a + b
+            playCost = a * 1+ b * 3
             if (game["Prize"]["X"] == xMovement and
                 game["Prize"]["Y"] == yMovement):
-                if (numberOfPlays < totalPlays):
+                if (playCost < minCost):
                     buttonPresses["A"] = a
                     buttonPresses["B"] = b
     return buttonPresses
@@ -48,8 +49,8 @@ with open("day13/sample.txt", "r", encoding="utf8") as file:
             game["Prize"] = {"X": x, "Y": y}
             data.append(game)
         
-    
-    total = sum(process_games(data))
+    print(data)
+    process_games(data)
     
 
     print(total)
