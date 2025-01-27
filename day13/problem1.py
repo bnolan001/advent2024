@@ -19,10 +19,11 @@ def calculate_game_play(game):
     return totalPlays
 
 def process_games(data):
-    total = 0
+    totalPlays = []
     for game in data:
-        total += calculate_game_play(game)
-    return total
+        totalPlays.append(calculate_game_play(game))
+    print(totalPlays)
+    return totalPlays
 
 with open("day13/sample.txt", "r", encoding="utf8") as file:
     data = []
@@ -49,7 +50,7 @@ with open("day13/sample.txt", "r", encoding="utf8") as file:
             data.append(game)
         
     
-    total = process_games(data)
+    total = sum(process_games(data))
     
 
     print(total)
