@@ -12,8 +12,13 @@ def calculate_game_play(game):
                 game["Prize"]["Y"] // yMovement):
                 if (numberOfPlays < totalPlays):
                     totalPlays = numberOfPlays
-            totalPlays += 1
-        
+    return totalPlays
+
+def process_games(data):
+    total = 0
+    for game in data:
+        total += calculate_game_play(game)
+    return total
 
 with open("day13/sample.txt", "r", encoding="utf8") as file:
     data = []
@@ -36,7 +41,8 @@ with open("day13/sample.txt", "r", encoding="utf8") as file:
             y = int(splitLine[2].split('=')[1])
             game["Prize"] = {"X": x, "Y": y}
         data.append(game)
-    print(data)
+    
+    total = process_games(data)
     
 
     print(total)
