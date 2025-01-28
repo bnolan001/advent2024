@@ -18,6 +18,7 @@ def calculate_game_button_presses(game):
                     buttonPresses["A"] = a
                     buttonPresses["B"] = b
                     minCost = playCost
+                    print("Found game play with A:", a, "B:", b, "Cost:", playCost)
     return buttonPresses
 
 def process_games(data):
