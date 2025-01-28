@@ -6,12 +6,12 @@ def calculate_game_button_presses(game):
     minY = min(game["A"]["Y"], game["B"]["Y"])
     for a in range(0, game["Prize"]["X"] // minX + 1):
         for b in range(0, game["Prize"]["Y"] // minY + 1):
-            if (a * 1 + b * 3 > minCost):
+            if (a * 3 + b * 1 > minCost):
                 continue
 
             xMovement = a * game["A"]["X"] + b * game["B"]["X"]
             yMovement = a * game["A"]["Y"] + b * game["B"]["Y"]
-            playCost = a * 1+ b * 3
+            playCost = a * 3 + b * 1
             if (game["Prize"]["X"] == xMovement and
                 game["Prize"]["Y"] == yMovement):
                 if (playCost < minCost):
@@ -27,7 +27,7 @@ def process_games(data):
     print(totalPlays)
     return totalPlays
 
-with open("day13/sample.txt", "r", encoding="utf8") as file:
+with open("day13/data.txt", "r", encoding="utf8") as file:
     data = []
     total = 0
     game = {}
@@ -54,6 +54,6 @@ with open("day13/sample.txt", "r", encoding="utf8") as file:
     
     gampe_play = process_games(data)
     for game in gampe_play:
-        total += game["A"] + game["B"] * 3
+        total += game["A"]  * 3+ game["B"] 
 
     print(total) 
