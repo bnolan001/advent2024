@@ -24,10 +24,11 @@ def process_games(data):
     totalPlays = []
     for game in data:
         totalPlays.append(calculate_game_button_presses(game))
+        print("Game", len(totalPlays), "requires", totalPlays[-1]["A"], "presses of button A and", totalPlays[-1]["B"], "presses of button B")
 
     return totalPlays
 
-with open("day13/data.txt", "r", encoding="utf8") as file:
+with open("day13/sample.txt", "r", encoding="utf8") as file:
     data = []
     total = 0
     game = {}
