@@ -2,8 +2,8 @@
 def calculate_game_button_presses(game):
     buttonPresses = {}
     minCost = 100000000000
-    for a in range(0, game["Prize"]["X"] // game["A"]["X"]):
-        for b in range(0, game["Prize"]["Y"] // game["B"]["X"]):
+    for a in range(0, game["Prize"]["X"] ):
+        for b in range(0, game["Prize"]["Y"] ):
             if (a == 0 and b == 0 or
                 a == 0 and b > 1):
                 continue
