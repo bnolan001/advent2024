@@ -24,7 +24,7 @@ def process_games(data):
     totalPlays = []
     for game in data:
         totalPlays.append(calculate_game_button_presses(game))
-    print(totalPlays)
+
     return totalPlays
 
 with open("day13/data.txt", "r", encoding="utf8") as file:
