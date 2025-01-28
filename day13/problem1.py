@@ -4,8 +4,7 @@ def calculate_game_button_presses(game):
     minCost = 100000000000
     for a in range(0, game["Prize"]["X"] ):
         for b in range(0, game["Prize"]["Y"] ):
-            if (a == 0 and b == 0 or
-                a == 0 and b > 1):
+            if (a * 1 + b * 3 > minCost):
                 continue
 
             xMovement = a * game["A"]["X"] + b * game["B"]["X"]
@@ -16,6 +15,7 @@ def calculate_game_button_presses(game):
                 if (playCost < minCost):
                     buttonPresses["A"] = a
                     buttonPresses["B"] = b
+                    minCost = playCost
     return buttonPresses
 
 def process_games(data):
@@ -49,7 +49,7 @@ with open("day13/sample.txt", "r", encoding="utf8") as file:
             game["Prize"] = {"X": x, "Y": y}
             data.append(game)
         
-    print(data)
+    
     process_games(data)
     
 
