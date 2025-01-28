@@ -2,8 +2,10 @@
 def calculate_game_button_presses(game):
     buttonPresses = {}
     minCost = 100000000000
-    for a in range(0, game["Prize"]["X"] / game["A"]["X"] + 1):
-        for b in range(0, game["Prize"]["Y"] / game["B"]["Y"] + 1):
+    minX = min(game["A"]["X"], game["B"]["X"])
+    minY = min(game["A"]["Y"], game["B"]["Y"])
+    for a in range(0, game["Prize"]["X"] // minX + 1):
+        for b in range(0, game["Prize"]["Y"] // minY + 1):
             if (a * 1 + b * 3 > minCost):
                 continue
 
