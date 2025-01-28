@@ -1,6 +1,6 @@
 
 def calculate_game_button_presses(game):
-    buttonPresses = {}
+    buttonPresses = {"A": 0, "B": 0}
     minCost = 100000000000
     minX = min(game["A"]["X"], game["B"]["X"])
     minY = min(game["A"]["Y"], game["B"]["Y"])
@@ -52,7 +52,8 @@ with open("day13/sample.txt", "r", encoding="utf8") as file:
             data.append(game)
         
     
-    process_games(data)
-    
+    gampe_play = process_games(data)
+    for game in gampe_play:
+        total += game["A"] + game["B"] * 3
 
-    print(total)
+    print(total) 
