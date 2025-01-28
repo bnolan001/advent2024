@@ -5,7 +5,7 @@ def calculate_game_button_presses(game):
     minX = min(game["A"]["X"], game["B"]["X"])
     minY = min(game["A"]["Y"], game["B"]["Y"])
     for a in range(0, game["Prize"]["X"] // minX + 1):
-        startingYValue = game["Prize"]["Y"] // minY
+        startingYValue = game["Prize"]["Y"] // minY - 1
         if a != 0:
             startingYValue = (game["Prize"]["Y"] - a * game["A"]["Y"])// minY - 1
         for b in range(startingYValue, game["Prize"]["Y"] // minY + 1):
@@ -51,8 +51,8 @@ with open("day13/sample.txt", "r", encoding="utf8") as file:
             y = int(splitLine[3].split('+')[1])
             game["B"] = {"X": x, "Y": y}
         elif "Prize" in splitLine[0]:
-            x = int(splitLine[1].split('=')[1].replace(',', '')) + 10000000000000
-            y = int(splitLine[2].split('=')[1]) + 10000000000000
+            x = int(splitLine[1].split('=')[1].replace(',', '')) #+ 10000000000000
+            y = int(splitLine[2].split('=')[1]) #+ 10000000000000
             game["Prize"] = {"X": x, "Y": y}
             data.append(game)
         
