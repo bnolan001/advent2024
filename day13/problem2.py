@@ -29,10 +29,12 @@ def calculate_game_button_presses(game):
 def process_games(data):
     totalPlays = []
     for game in data:
-        gcm = euclidean_algorithm(game["A"]["X"], game["B"]["X"])
-        if gcm == 1:
+        gcmX = euclidean_algorithm(game["A"]["X"], game["B"]["X"])
+        gcmY = euclidean_algorithm(game["A"]["Y"], game["B"]["Y"])
+        if gcmX == 1 or gcmY == 1:
+            print("Skipping")
             continue
-        print("GCM", gcm)
+        print("GCM X", gcmX, "GCM Y", gcmY)
         #totalPlays.append(calculate_game_button_presses(game))
         #print("Game", len(totalPlays), "requires", totalPlays[-1]["A"], "presses of button A and", totalPlays[-1]["B"], "presses of button B")
 
