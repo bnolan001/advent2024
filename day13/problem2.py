@@ -15,8 +15,6 @@ def calculate_game_button_presses(game):
         
         buttonPresses["A"] = a
         buttonPresses["B"] = b
-        
-        print("Found game play with A:", a, "B:", b, "Cost:", playCost)
         break
     return buttonPresses
 
