@@ -1,7 +1,7 @@
 
 def calculate_game_button_presses(game):
     buttonPresses = {"A": 0, "B": 0}
-    minCost = 100000000000000
+    
     minX = min(game["A"]["X"], game["B"]["X"])
     for a in range(0, game["Prize"]["X"] // minX + 1):
         remainingX = game["Prize"]["X"] - game["A"]["X"] * a
@@ -12,11 +12,12 @@ def calculate_game_button_presses(game):
        
         b = remainingY // game["B"]["Y"]
         playCost = a * 3 + b * 1
-        if (playCost < minCost):
-            buttonPresses["A"] = a
-            buttonPresses["B"] = b
-            minCost = playCost
-            print("Found game play with A:", a, "B:", b, "Cost:", playCost)
+        
+        buttonPresses["A"] = a
+        buttonPresses["B"] = b
+        
+        print("Found game play with A:", a, "B:", b, "Cost:", playCost)
+        break
     return buttonPresses
 
 def process_games(data):
@@ -27,7 +28,7 @@ def process_games(data):
 
     return totalPlays
 
-with open("day13/sample.txt", "r", encoding="utf8") as file:
+with open("day13/data.txt", "r", encoding="utf8") as file:
     data = []
     total = 0
     game = {}
