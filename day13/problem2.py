@@ -1,3 +1,12 @@
+def euclidean_algorithm(a, b):
+    if a < b:
+        (a,b) = (b,a)
+
+    if b == 0:
+        return a
+    return euclidean_algorithm(b, a % b)
+
+
 
 def calculate_game_button_presses(game):
     buttonPresses = {"A": 0, "B": 0}
@@ -11,7 +20,6 @@ def calculate_game_button_presses(game):
             continue
        
         b = remainingY // game["B"]["Y"]
-        playCost = a * 3 + b * 1
         
         buttonPresses["A"] = a
         buttonPresses["B"] = b
@@ -21,8 +29,12 @@ def calculate_game_button_presses(game):
 def process_games(data):
     totalPlays = []
     for game in data:
-        totalPlays.append(calculate_game_button_presses(game))
-        print("Game", len(totalPlays), "requires", totalPlays[-1]["A"], "presses of button A and", totalPlays[-1]["B"], "presses of button B")
+        gcm = euclidean_algorithm(game["A"]["X"], game["B"]["X"])
+        if gcm == 1:
+            continue
+        print("GCM", gcm)
+        #totalPlays.append(calculate_game_button_presses(game))
+        #print("Game", len(totalPlays), "requires", totalPlays[-1]["A"], "presses of button A and", totalPlays[-1]["B"], "presses of button B")
 
     return totalPlays
 
