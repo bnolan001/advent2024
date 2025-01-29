@@ -41,7 +41,8 @@ def process_games(data):
         game["A"]["Y"] //= gcmY
         game["B"]["Y"] //= gcmY
         game["Prize"]["Y"] //= gcmY
-        totalPlays.append(calculate_game_button_presses(game))
+        result = calculate_game_button_presses(game)
+        totalPlays.append({"A": result["A"] * gcmX * gcmY, "B": result["B"]  * gcmX * gcmY })
         print("Game", len(totalPlays), "requires", totalPlays[-1]["A"], "presses of button A and", totalPlays[-1]["B"], "presses of button B")
 
     return totalPlays
