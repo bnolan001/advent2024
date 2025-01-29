@@ -11,13 +11,14 @@ def euclidean_algorithm(a, b):
 def calculate_game_button_presses(game):
     buttonPresses = {"A": 0, "B": 0}
     
-    a = ((game["Prize"]["X"] * game["B"]["Y"] - game["Prize"]["Y"] * game["B"]["X"]) / 
+    a = abs((game["Prize"]["X"] * game["B"]["Y"] - game["Prize"]["Y"] * game["B"]["X"]) / 
             (game["A"]["X"] * game["B"]["Y"] - game["A"]["Y"] * game["B"]["X"]))
-    b = ((game["Prize"]["X"] * game["A"]["Y"] - game["Prize"]["Y"] * game["A"]["X"]) / 
+    b = abs((game["Prize"]["X"] * game["A"]["Y"] - game["Prize"]["Y"] * game["A"]["X"]) / 
             (game["A"]["X"] * game["B"]["Y"] - game["A"]["Y"] * game["B"]["X"]))
     
-    buttonPresses["A"] = a
-    buttonPresses["B"] = b
+    if (a.is_integer() and b.is_integer()):
+        buttonPresses["A"] = int(a)
+        buttonPresses["B"] = int(b)
     
     return buttonPresses
 
@@ -31,7 +32,7 @@ def process_games(data):
 
     return totalPlays
 
-with open("day13/sample.txt", "r", encoding="utf8") as file:
+with open("day13/data.txt", "r", encoding="utf8") as file:
     data = []
     total = 0
     game = {}
@@ -50,8 +51,8 @@ with open("day13/sample.txt", "r", encoding="utf8") as file:
             y = int(splitLine[3].split('+')[1])
             game["B"] = {"X": x, "Y": y}
         elif "Prize" in splitLine[0]:
-            x = int(splitLine[1].split('=')[1].replace(',', ''))# + 10000000000000
-            y = int(splitLine[2].split('=')[1])# + 10000000000000
+            x = int(splitLine[1].split('=')[1].replace(',', '')) + 10000000000000
+            y = int(splitLine[2].split('=')[1]) + 10000000000000
             game["Prize"] = {"X": x, "Y": y}
             data.append(game)
         
