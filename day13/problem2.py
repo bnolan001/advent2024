@@ -11,38 +11,22 @@ def euclidean_algorithm(a, b):
 def calculate_game_button_presses(game):
     buttonPresses = {"A": 0, "B": 0}
     
-    minX = min(game["A"]["X"], game["B"]["X"])
-    for a in range(0, game["Prize"]["X"] // minX + 1):
-        remainingX = game["Prize"]["X"] - game["A"]["X"] * a
-        remainingY = game["Prize"]["Y"] - game["A"]["Y"] * a
-        if (remainingX % game["B"]["X"] != 0 or remainingY % game["B"]["Y"] != 0 or 
-            remainingX // game["B"]["X"] != remainingY // game["B"]["Y"]):
-            continue
-       
-        b = remainingY // game["B"]["Y"]
-        
-        buttonPresses["A"] = a
-        buttonPresses["B"] = b
-        break
+    a = ((game["Prize"]["X"] * game["B"]["Y"] - game["Prize"]["Y"] * game["B"]["X"]) / 
+            (game["A"]["X"] * game["B"]["Y"] - game["A"]["Y"] * game["B"]["X"]))
+    b = ((game["Prize"]["X"] * game["B"]["X"] - game["Prize"]["Y"] * game["A"]["X"]) / 
+            (game["B"]["X"] * game["A"]["X"] - game["A"]["Y"] * game["A"]["X"]))
+    
+    buttonPresses["A"] = a
+    buttonPresses["B"] = b
+    
     return buttonPresses
 
 def process_games(data):
     totalPlays = []
     for game in data:
-        gcmX = euclidean_algorithm(game["A"]["X"], game["B"]["X"])
-        gcmY = euclidean_algorithm(game["A"]["Y"], game["B"]["Y"])
-        if gcmX == 1 or gcmY == 1:
-            print("Skipping")
-            continue
-        print("GCM X", gcmX, "GCM Y", gcmY)
-        game["A"]["X"] //= gcmX
-        game["B"]["X"] //= gcmX
-        game["Prize"]["X"] //= gcmX
-        game["A"]["Y"] //= gcmY
-        game["B"]["Y"] //= gcmY
-        game["Prize"]["Y"] //= gcmY
+        
         result = calculate_game_button_presses(game)
-        totalPlays.append({"A": result["A"] * gcmX * gcmY, "B": result["B"]  * gcmX * gcmY })
+        totalPlays.append(result)
         print("Game", len(totalPlays), "requires", totalPlays[-1]["A"], "presses of button A and", totalPlays[-1]["B"], "presses of button B")
 
     return totalPlays
