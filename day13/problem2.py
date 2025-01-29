@@ -47,7 +47,7 @@ def process_games(data):
 
     return totalPlays
 
-with open("day13/data.txt", "r", encoding="utf8") as file:
+with open("day13/sample.txt", "r", encoding="utf8") as file:
     data = []
     total = 0
     game = {}
