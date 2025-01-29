@@ -13,8 +13,8 @@ def calculate_game_button_presses(game):
     
     a = ((game["Prize"]["X"] * game["B"]["Y"] - game["Prize"]["Y"] * game["B"]["X"]) / 
             (game["A"]["X"] * game["B"]["Y"] - game["A"]["Y"] * game["B"]["X"]))
-    b = ((game["Prize"]["X"] * game["B"]["X"] - game["Prize"]["Y"] * game["A"]["X"]) / 
-            (game["B"]["X"] * game["A"]["X"] - game["A"]["Y"] * game["A"]["X"]))
+    b = ((game["Prize"]["X"] * game["A"]["Y"] - game["Prize"]["Y"] * game["A"]["X"]) / 
+            (game["A"]["X"] * game["B"]["Y"] - game["A"]["Y"] * game["B"]["X"]))
     
     buttonPresses["A"] = a
     buttonPresses["B"] = b
