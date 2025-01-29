@@ -35,8 +35,14 @@ def process_games(data):
             print("Skipping")
             continue
         print("GCM X", gcmX, "GCM Y", gcmY)
-        #totalPlays.append(calculate_game_button_presses(game))
-        #print("Game", len(totalPlays), "requires", totalPlays[-1]["A"], "presses of button A and", totalPlays[-1]["B"], "presses of button B")
+        game["A"]["X"] //= gcmX
+        game["B"]["X"] //= gcmX
+        game["Prize"]["X"] //= gcmX
+        game["A"]["Y"] //= gcmY
+        game["B"]["Y"] //= gcmY
+        game["Prize"]["Y"] //= gcmY
+        totalPlays.append(calculate_game_button_presses(game))
+        print("Game", len(totalPlays), "requires", totalPlays[-1]["A"], "presses of button A and", totalPlays[-1]["B"], "presses of button B")
 
     return totalPlays
 
@@ -59,8 +65,8 @@ with open("day13/data.txt", "r", encoding="utf8") as file:
             y = int(splitLine[3].split('+')[1])
             game["B"] = {"X": x, "Y": y}
         elif "Prize" in splitLine[0]:
-            x = int(splitLine[1].split('=')[1].replace(',', '')) + 10000000000000
-            y = int(splitLine[2].split('=')[1]) + 10000000000000
+            x = int(splitLine[1].split('=')[1].replace(',', ''))# + 10000000000000
+            y = int(splitLine[2].split('=')[1])# + 10000000000000
             game["Prize"] = {"X": x, "Y": y}
             data.append(game)
         
