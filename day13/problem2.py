@@ -1,14 +1,6 @@
-def euclidean_algorithm(a, b):
-    if a < b:
-        (a,b) = (b,a)
-
-    if b == 0:
-        return a
-    return euclidean_algorithm(b, a % b)
-
-
 
 def calculate_game_button_presses(game):
+    ### Calculate the number of required moves by Cramer's Rule ###
     buttonPresses = {"A": 0, "B": 0}
     
     a = abs((game["Prize"]["X"] * game["B"]["Y"] - game["Prize"]["Y"] * game["B"]["X"]) / 
