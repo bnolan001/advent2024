@@ -6,8 +6,8 @@ def print_robots_map(robots, dimensions):
         print(''.join(row))
 
 def check_for_tree(robots, dimensions):
-    height = dimensions['height'] // 2 + 2
     center_point = dimensions['width'] // 2
+    height = center_point + 2
     top = {}
     bottom = {}
     for robot in robots:
