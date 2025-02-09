@@ -17,11 +17,32 @@ def calculate_movement(robots, dimensions, timeperiod):
         robot['y'] = remainderY
     return robots
 
-with open("day14/sample.txt", "r", encoding="utf8") as file:
+def calculate_safety_factor(robots, dimensions):
+    quadronts = {
+        '1': [],
+        '2': [],
+        '3': [],
+        '4': []
+    }
+    ignoreX = dimensions['width'] // 2
+    ignoreY = dimensions['height'] // 2
+    for robot in robots:
+        if robot['x'] < ignoreX and robot['y'] < ignoreY:
+            quadronts['1'].append(robot)
+        elif robot['x'] > ignoreX and robot['y'] < ignoreY:
+            quadronts['2'].append(robot)
+        elif robot['x'] > ignoreX and robot['y'] > ignoreY:
+            quadronts['3'].append(robot)
+        elif robot['x'] < ignoreX and robot['y'] > ignoreY:
+            quadronts['4'].append(robot)
+            
+    return len(quadronts['1']) * len(quadronts['2']) * len(quadronts['3']) * len(quadronts['4']) 
+
+with open("day14/data.txt", "r", encoding="utf8") as file:
     robots = []
     total = 0
-    # dimensions = {"width": 101, "height": 103} # data.txt
-    dimensions = {"width": 11, "height": 7} # sample.txt
+    dimensions = {"width": 101, "height": 103} # data.txt
+    # dimensions = {"width": 11, "height": 7} # sample.txt
 
     for line in file:
         splitLine = line.replace('p=', '').replace('v=', '').split(' ')
@@ -33,8 +54,9 @@ with open("day14/sample.txt", "r", encoding="utf8") as file:
             'vx': int(velocity[0]),
             'vy': int(velocity[1])
         })
-    print_robots_map(robots, dimensions)    
-    print('-------------------')
+    #print_robots_map(robots, dimensions)    
+    #print('-------------------')
     calculate_movement(robots, dimensions, 100)
-    print_robots_map(robots, dimensions)
+    #print_robots_map(robots, dimensions)
+    total = calculate_safety_factor(robots, dimensions)
     print(total) 
