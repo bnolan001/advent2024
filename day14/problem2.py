@@ -36,7 +36,7 @@ with open("day14/sample.txt", "r", encoding="utf8") as file:
             'vx': int(velocity[0]),
             'vy': int(velocity[1])
         })
-    calculate_movement(robots, dimensions)
+    find_christmas_tree(robots, dimensions)
     #print_robots_map(robots, dimensions)
-    total = calculate_safety_factor(robots, dimensions)
+    
     print(total) 
