@@ -29,8 +29,10 @@ def calculate_movement(robots, dimensions):
     return robots
 
 def find_christmas_tree(robots, dimensions):
-    for x in range(10000000):
+    for x in range(10000000000):
         calculate_movement(robots, dimensions)
+        print_robots_map(robots, dimensions)
+        print('-------------------')
         if check_for_tree(robots, dimensions):
             print_robots_map(robots, dimensions)
             print('-------------------')
