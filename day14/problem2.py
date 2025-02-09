@@ -36,8 +36,6 @@ with open("day14/sample.txt", "r", encoding="utf8") as file:
             'vx': int(velocity[0]),
             'vy': int(velocity[1])
         })
-    #print_robots_map(robots, dimensions)    
-    #print('-------------------')
     calculate_movement(robots, dimensions)
     #print_robots_map(robots, dimensions)
     total = calculate_safety_factor(robots, dimensions)
