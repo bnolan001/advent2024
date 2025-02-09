@@ -5,6 +5,20 @@ def print_robots_map(robots, dimensions):
     for row in map:
         print(''.join(row))
 
+def check_for_tree(robots, dimensions):
+    height = dimensions['height'] // 2 + 2
+    center_point = dimensions['width'] // 2
+    top = {}
+    bottom = {}
+    for robot in robots:
+        if robot['x'] == center_point and robot['y'] == 0:
+            top = robot
+        if robot['x'] == center_point and robot['y'] == height:
+            bottom = robot
+
+    if top and bottom:
+        return True
+
 def calculate_movement(robots, dimensions):
     for robot in robots:
         totalX = (robot['x'] + robot['vx']) % dimensions['width']
@@ -15,10 +29,13 @@ def calculate_movement(robots, dimensions):
     return robots
 
 def find_christmas_tree(robots, dimensions):
-    for x in range(100):
+    for x in range(10000000):
         calculate_movement(robots, dimensions)
-        print_robots_map(robots, dimensions)
-        print('-------------------')
+        if check_for_tree(robots, dimensions):
+            print_robots_map(robots, dimensions)
+            print('-------------------')
+            
+        
 
 with open("day14/sample.txt", "r", encoding="utf8") as file:
     robots = []
