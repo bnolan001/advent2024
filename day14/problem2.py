@@ -31,8 +31,8 @@ def calculate_movement(robots, dimensions):
 def find_christmas_tree(robots, dimensions):
     for x in range(10000000000):
         calculate_movement(robots, dimensions)
-        print_robots_map(robots, dimensions)
-        print('-------------------')
+        #print_robots_map(robots, dimensions)
+        #print('-------------------')
         if check_for_tree(robots, dimensions):
             print_robots_map(robots, dimensions)
             print('-------------------')
