@@ -5,38 +5,20 @@ def print_robots_map(robots, dimensions):
     for row in map:
         print(''.join(row))
 
-def calculate_movement(robots, dimensions, timeperiod):
+def calculate_movement(robots, dimensions):
     for robot in robots:
-        totalX = robot['x'] + robot['vx'] * timeperiod
-        totalY = robot['y'] + robot['vy'] * timeperiod
-        remainderX = totalX % dimensions['width']
-        remainderY = totalY % dimensions['height']
-        lapsX = totalX // dimensions['width']
-        lapsY = totalY // dimensions['height']
-        robot['x'] = remainderX
-        robot['y'] = remainderY
+        totalX = (robot['x'] + robot['vx']) % dimensions['width']
+        totalY = (robot['y'] + robot['vy']) % dimensions['height']
+        
+        robot['x'] = totalX
+        robot['y'] = totalY
     return robots
 
-def calculate_safety_factor(robots, dimensions):
-    quadronts = {
-        '1': [],
-        '2': [],
-        '3': [],
-        '4': []
-    }
-    ignoreX = dimensions['width'] // 2
-    ignoreY = dimensions['height'] // 2
-    for robot in robots:
-        if robot['x'] < ignoreX and robot['y'] < ignoreY:
-            quadronts['1'].append(robot)
-        elif robot['x'] > ignoreX and robot['y'] < ignoreY:
-            quadronts['2'].append(robot)
-        elif robot['x'] > ignoreX and robot['y'] > ignoreY:
-            quadronts['3'].append(robot)
-        elif robot['x'] < ignoreX and robot['y'] > ignoreY:
-            quadronts['4'].append(robot)
-            
-    return len(quadronts['1']) * len(quadronts['2']) * len(quadronts['3']) * len(quadronts['4']) 
+def find_christmas_tree(robots, dimensions):
+    for x in range(100):
+        calculate_movement(robots, dimensions)
+        print_robots_map(robots, dimensions)
+        print('-------------------')
 
 with open("day14/sample.txt", "r", encoding="utf8") as file:
     robots = []
@@ -56,7 +38,7 @@ with open("day14/sample.txt", "r", encoding="utf8") as file:
         })
     #print_robots_map(robots, dimensions)    
     #print('-------------------')
-    calculate_movement(robots, dimensions, 100)
+    calculate_movement(robots, dimensions)
     #print_robots_map(robots, dimensions)
     total = calculate_safety_factor(robots, dimensions)
     print(total) 
